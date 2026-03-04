@@ -2,7 +2,6 @@
 layout: page
 title: About Us
 ---
-
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
@@ -25,11 +24,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-### Johnny Doe
+### Chen Hongshan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Hongshan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/ChenHongshan333)]
+
+[[portfolio](https://chenhongshan333.github.io/)]
 
 * Role: Developer
 * Responsibilities: Data
