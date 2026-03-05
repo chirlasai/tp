@@ -327,7 +327,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **JavaFX**: A Java library used to build the graphical user interface (GUI) of this application
+* **FXML**: An XML-based file format used by JavaFX to define the layout and structure of UI components separately from application logic
+* **Component**: A self-contained, replaceable part of the application (e.g., UI, Logic, Model, Storage), each responsible for a distinct concern and communicating with others only through defined interfaces
+* **Coupling**: The degree of dependency between components. Low coupling is preferred, as it means changes to one component are less likely to break others
+* **Model**: The component that holds all in-memory application data (contacts, user preferences)
+* **ObservableList**: A JavaFX list that automatically notifies listeners (such as the UI) when its contents change, enabling the display to refresh without manual intervention
+* **Filtered List**: A view of the full contact list showing only entries that match current search criteria. It updates dynamically as the underlying data or filter changes\
+* **State/Address book state**: A complete snapshot of the address book's data at a given point in time. Used by the undo/redo feature to restore previous versions
+* **Commit (in undo/redo context)**: The act of saving the current address book state into history, analogous to saving a checkpoint. Not related to version control commits
+* **Sequence Diagram**: A UML diagram showing how objects interact with each other in a specific time-ordered sequence of method calls
+* **Activity diagram**: A UML diagram showing the flow of control through a process, including decision points and parallel actions
+* **Class diagram**: A UML diagram showing the structure of classes, their attributes, methods, and relationships (e.g., inheritance, association)
+* **MSS**: Main Success Scenario.  Scenario)The primary, happy-path flow of a use case, describing what happens when everything goes as expected with no errors or exceptions
+* **PlantUML**: A that generates UML diagrams from plain text descriptions. The .puml files in this project define all architectural diagrams
+* **Lifeline (in sequence diagrams)**: The vertical dashed line in a sequence diagram representing an object's existence over time. It ends with a destroy marker (X) when the object is no longer needed
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
