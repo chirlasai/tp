@@ -264,28 +264,55 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a member of NUS Cate Cafe CCA
+* has a need to manage a significant number of stray cats in NUS Campus
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Provides fast, CLI-optimized access to information of stray cats living in NUS campus so volunteers can reliably identify cats and keep key status details up to date. Designed for personal or small-team use; not a veterinary medical system, shelter operations tool, or public registry.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: 
+MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …                                    | I want to …                 | So that I can…                                                        |
-| -------- | ------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+| Priority   | As a …                            | I want to …                                                                            | So that I can…                                                                         |
+|------------|-----------------------------------| --------------------------------------------------------------------------------------- |----------------------------------------------------------------------------------------|
+| `* * * * ` | regular feeder                    | search a cat by name/alias in the CLI                                                   | identify it quickly on the spot                                                        |
+| `* * * *`  | volunteer                         | update a cat’s key status fields (e.g., sterilised/ear-tipped, friendliness, usual area) | our data stays accurate for small-team coordination                                    |
+| `* * * *`  | volunteer                         | add cat entries                                                                         | keep the record of a newly-found stray cat                                             |
+| `* * * *`  | user                              | delete a cat profile                                                                    | remove duplicate entries or data errors to keep the database clean                     |
+| `* * *`    | frequent user                     | use short-hand flags (e.g., -n for name, -t for territory)                          | type faster                                                                            |
+| `* * *`    | volunteer                         | add and search by multiple identifiers (alias, coat color, landmark)                  | still find a cat when I don’t know its name                                            |
+| `* * *`    | volunteer updating a cat’s record | the CLI to prompt for confirmation before applying changes     | not accidentally overwrite important information                                       |
+| `* * *`    | volunteer                         | export the list of cats data stored in this app             | get a physical cooy of the list                                                        |
+| `* * *`    | volunteer                         | undo or revert my last update                                                            | be away from the risk where accidental edits permanently corrupt records               |
+| `* * *`    | volunteer                         | tag a cat with quick flags (e.g., “shy”, “approachable”, “avoid”)              | interact safely and consistently                                                       |
+| `* * *`    | user                              | see a quick profile of each cat on the main page | get an overview of all the cats without diving into details                            |
+| `* * *`    | new user                          | run a guided “first-time” CLI help command  | learn the workflow quickly                                                             |
+| `* * *`    | volunteer                         |  filter cats by certain attributes     | get the information of a group of cats that share some similarities                    |
+| `* * *`    | volunteer                         | attach an image of the cat                                                                   | see how the cat is looked like in the most directly way                                |
+| `* *`      | user                              | use a personal account and a corresponding key to login          | be away from the issue that unauthorized users will have access to this system         |
+| `* *`      | user                              | attach a link that keeps an archive of the cat (videos, more pirctures) for each cat recorded in this system             | more information of cats can be retrieved without taking up storage inside of this app |
+| `* *`      | commitee member                   | edit a cat’s profile to change their status to "adopted"                  | stop deploying resources for cats that are no longer on campus                         |
+| `* *`      | volunteer                         | mark a cat's entry grey to indicate that the cat has unfortunately died         | show respect and R.I.P to cats                                                         |
+| `* *`      | first time user                   | learn how to use this app with a tutorial provided when I first open it  | get myself familiar without exploring by myself                                        |
+| `*`        | volunteer                         | auto-identify a cat from a photo using on-device recognition                      | be free from typing names at all                                                       |
+| `*`        | volunteer                         | see a list of "Missing in Action" cat                                                                  | rescue them in time                                                                    |
+| `*`        | volunteer                         |use fuzzy search and typo tolerance        | find cats quickly even with imperfect spelling                                         |
+| `*`        | volunteer                         | “favorite” a set of cats    | pull up my usual watchlist with one command                                            |
+| `*`        | volunteer                         | create a “needs follow-up” note (non-medical)       | be in the situation where the next person knows what to check without guessing         |
+| `*`        | volunteer                         | maintain a “cat family tree / social graph” (friendships, rivalries, territories) | understand colony dynamics over time                                                   |
+| `*`        | volunteer                         | record structured medical observations (symptoms checklist + severity) | get to the concerns consistently (not a diagnosis)                                     |
+| `*`        | volunteer                         | log medication administration (drug name, dosage, time, handler)| track the treatment history and thus reduces mistakes                                  |
+| `*`        | volunteer                         | get “triage suggestions” based on symptoms   | know whether to monitor, isolate, or escalate (high-risk, needs careful disclaimers)   |
+| `*`        | volunteer                         | use arrow keys (or command history)  | quickly repeat a previous complex command without re-typing it entirely                |
+| `*`        | volunteer                         | keep track of where the cat is last seen (especially if out of its own territory)| track the cat in a more detailed way                                                   |
 *{More to be added}*
 
 ### Use cases
@@ -316,11 +343,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+## Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+### Compatibility
+- Should work on any mainstream OS (Windows, macOS, Linux) as long as Java `17` or above is installed.
+
+### Performance
+- Should be able to hold up to 1000 cat records without noticeable sluggishness in performance for typical usage.
+- Response time for adding, deleting, or editing a record should be under 1 second.
+- Search results should be displayed within 0.5 seconds of input.
+
+### Usability
+- A user with above average typing speed for regular English text should be able to accomplish most tasks faster using commands than using the mouse.
+- A new user should be able to complete their first cat record entry within 5 minutes.
+
+### Reliability
+- Data should be automatically saved after each operation without requiring manual saving.
+- Data should be fully recoverable after an unexpected application crash.
+
+### Maintainability
+- Adding new fields should not require significant code refactoring.
+
+### Portability
+- Should support exporting data in CSV or JSON format for backup or migration purposes.
 
 *{More to be added}*
 
@@ -328,6 +376,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **JavaFX**: A Java library used to build the graphical user interface (GUI) of this application
+* **FXML**: An XML-based file format used by JavaFX to define the layout and structure of UI components separately from application logic
+* **Component**: A self-contained, replaceable part of the application (e.g., UI, Logic, Model, Storage), each responsible for a distinct concern and communicating with others only through defined interfaces
+* **Coupling**: The degree of dependency between components. Low coupling is preferred, as it means changes to one component are less likely to break others
+* **Model**: The component that holds all in-memory application data (contacts, user preferences)
+* **ObservableList**: A JavaFX list that automatically notifies listeners (such as the UI) when its contents change, enabling the display to refresh without manual intervention
+* **Filtered List**: A view of the full contact list showing only entries that match current search criteria. It updates dynamically as the underlying data or filter changes\
+* **State/Address book state**: A complete snapshot of the address book's data at a given point in time. Used by the undo/redo feature to restore previous versions
+* **Commit (in undo/redo context)**: The act of saving the current address book state into history, analogous to saving a checkpoint. Not related to version control commits
+* **Sequence Diagram**: A UML diagram showing how objects interact with each other in a specific time-ordered sequence of method calls
+* **Activity diagram**: A UML diagram showing the flow of control through a process, including decision points and parallel actions
+* **Class diagram**: A UML diagram showing the structure of classes, their attributes, methods, and relationships (e.g., inheritance, association)
+* **MSS**: Main Success Scenario.  Scenario)The primary, happy-path flow of a use case, describing what happens when everything goes as expected with no errors or exceptions
+* **PlantUML**: A that generates UML diagrams from plain text descriptions. The .puml files in this project define all architectural diagrams
+* **Lifeline (in sequence diagrams)**: The vertical dashed line in a sequence diagram representing an object's existence over time. It ends with a destroy marker (X) when the object is no longer needed
 
 ---
 
