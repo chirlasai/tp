@@ -28,11 +28,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Hongshan
 
-<img src="images/Hongshan.png" width="200px">
+<img src="images/chenhongshan333.png" width="200px">
 
+[[homepage](https://chenhongshan333.github.io/)]
 [[github](https://github.com/ChenHongshan333)]
-
-[[portfolio](https://chenhongshan333.github.io/)]
 
 * Role: Developer
 * Responsibilities: Data

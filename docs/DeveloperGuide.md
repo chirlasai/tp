@@ -1,9 +1,8 @@
 ---
-layout: page
-title: Developer Guide
+span
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 ---
 
@@ -393,7 +392,7 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 * **PlantUML**: A that generates UML diagrams from plain text descriptions. The .puml files in this project define all architectural diagrams
 * **Lifeline (in sequence diagrams)**: The vertical dashed line in a sequence diagram representing an object's existence over time. It ends with a destroy marker (X) when the object is no longer needed
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
