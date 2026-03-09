@@ -1,16 +1,14 @@
+![banner](docs/images/CatPals_banner.png)
 [![CI Status](https://github.com/AY2526S2-CS2103T-T16-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2526S2-CS2103T-T16-3/tp/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 ![Java](https://img.shields.io/badge/Java-17-informational)
 [![Made with Jekyll](https://img.shields.io/badge/Jekyll-3.9-blue?logo=jekyll&logoColor=white)](https://jekyllrb.com "Go to Jekyll homepage")
-
-![banner](docs/images/CatPals_banner.png)
-
-![Ui](docs/images/Ui.png)
-
 ![GitHub Created At](https://img.shields.io/github/created-at/lang-jiaqi/tp?color=...)
 ![contributors](https://img.shields.io/badge/contributors-5-brightgreen)
 ![license](https://img.shields.io/github/license/lang-jiaqi/tp.svg?color=bright-green)
 ![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)
+
+![Ui](docs/images/Ui.png)
 
 ## Table of Contents
 
