@@ -49,14 +49,14 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_noMatchingKeywords_noPersonFound() {
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("NonExistentCatName"));
         FindCommand command = new FindCommand(predicate);
 
         CommandException thrown = assertThrows(CommandException.class, () -> command.execute(model));
         assertEquals(FindCommand.MESSAGE_NO_MATCH, thrown.getMessage());
-
-        assertEquals(Collections.emptyList(), model.getFilteredCatList());
+        org.junit.jupiter.api.Assertions.assertTrue(model.getFilteredCatList().isEmpty());
     }
 
     @Test
