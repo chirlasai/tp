@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.cat;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Cat in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Cat {
 
     // Identity fields
     private final Name name;
@@ -28,7 +28,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Cat(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -62,21 +62,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both cats have the same name.
+     * This defines a weaker notion of equality between two cats.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameCat(Cat otherCat) {
+        if (otherCat == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherCat != null
+                && otherCat.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both cats have the same identity and data fields.
+     * This defines a stronger notion of equality between two cats.
      */
     @Override
     public boolean equals(Object other) {
@@ -85,16 +85,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Cat)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Cat otherCat = (Cat) other;
+        return name.equals(otherCat.name)
+                && phone.equals(otherCat.phone)
+                && email.equals(otherCat.email)
+                && address.equals(otherCat.address)
+                && tags.equals(otherCat.tags);
     }
 
     @Override
