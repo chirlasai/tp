@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.cat.Cat;
 
 /**
  * Adds a cat profile to the cat notebook.
@@ -32,31 +32,30 @@ public class AddCommand extends Command {
             + PREFIX_HEALTH + "Vaccinated";
 
     public static final String MESSAGE_SUCCESS = "New cat profile successfully added: %1$s.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "The cat name already exists!";
-
+    public static final String MESSAGE_DUPLICATE_CAT = "The cat name already exists!";
     public static final String MESSAGE_MISSING_ATTRIBUTES = "Missing attribute. Make sure to include key attributes";
     public static final String MESSAGE_INVALID_PARAMETERS = "Invalid command parameters!";
     public static final String MESSAGE_DUPLICATION_DETECTED = "Duplication detected!";
 
-    private final Person toAdd;
+    private final Cat toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Cat}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Cat cat) {
+        requireNonNull(cat);
+        toAdd = cat;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasCat(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CAT);
         }
 
-        model.addPerson(toAdd);
+        model.addCat(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

@@ -28,10 +28,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Name;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.EditCommand.EditCatDescriptor;
+import seedu.address.model.cat.Location;
+import seedu.address.model.cat.Name;
+import seedu.address.testutil.EditCatDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -81,7 +81,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TRAIT_DESC_FLUFFY + TRAIT_DESC_ORANGE
                 + LOCATION_DESC_AMY + NAME_DESC_AMY + HEALTH_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditCatDescriptor descriptor = new EditCatDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withTraits(VALID_TRAIT_FLUFFY, VALID_TRAIT_ORANGE).withLocation(VALID_LOCATION_AMY)
                 .withHealth(VALID_HEALTH_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -94,7 +94,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + LOCATION_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withLocation(VALID_LOCATION_AMY).build();
+        EditCatDescriptor descriptor = new EditCatDescriptorBuilder().withLocation(VALID_LOCATION_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -105,19 +105,19 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCatDescriptor descriptor = new EditCatDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // location
         userInput = targetIndex.getOneBased() + LOCATION_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withLocation(VALID_LOCATION_AMY).build();
+        descriptor = new EditCatDescriptorBuilder().withLocation(VALID_LOCATION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // traits
         userInput = targetIndex.getOneBased() + TRAIT_DESC_ORANGE;
-        descriptor = new EditPersonDescriptorBuilder().withTraits(VALID_TRAIT_ORANGE).build();
+        descriptor = new EditCatDescriptorBuilder().withTraits(VALID_TRAIT_ORANGE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -136,7 +136,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TRAIT_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTraits().build();
+        EditCatDescriptor descriptor = new EditCatDescriptorBuilder().withTraits().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

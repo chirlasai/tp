@@ -14,9 +14,9 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditCatDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Trait;
+import seedu.address.model.cat.Trait;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -43,24 +43,24 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_LOCATION, PREFIX_HEALTH);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditCatDescriptor editCatDescriptor = new EditCatDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editCatDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            editPersonDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+            editCatDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
         if (argMultimap.getValue(PREFIX_HEALTH).isPresent()) {
-            editPersonDescriptor.setHealth(ParserUtil.parseHealth(argMultimap.getValue(PREFIX_HEALTH).get()));
+            editCatDescriptor.setHealth(ParserUtil.parseHealth(argMultimap.getValue(PREFIX_HEALTH).get()));
         }
-        parseTraitsForEdit(argMultimap.getAllValues(PREFIX_TRAIT)).ifPresent(editPersonDescriptor::setTraits);
+        parseTraitsForEdit(argMultimap.getAllValues(PREFIX_TRAIT)).ifPresent(editCatDescriptor::setTraits);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editCatDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editCatDescriptor);
     }
 
     /**

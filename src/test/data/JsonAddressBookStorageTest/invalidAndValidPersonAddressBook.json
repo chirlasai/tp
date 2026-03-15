@@ -1,5 +1,5 @@
 {
-  "persons": [ {
+  "cats": [ {
     "name": "Valid Cat",
     "traits": [ "Orange" ],
     "location": "Utown"

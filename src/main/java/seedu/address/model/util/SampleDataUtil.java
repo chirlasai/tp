@@ -6,32 +6,33 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Health;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Trait;
+import seedu.address.model.cat.Cat;
+import seedu.address.model.cat.Health;
+import seedu.address.model.cat.Location;
+import seedu.address.model.cat.Name;
+import seedu.address.model.cat.Trait;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample cat data.
  */
 public class SampleDataUtil {
+
     /**
-     * Returns an array of sample {@code Person} objects.
+     * Returns an array of sample {@code Cat} objects.
      */
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Bowie"), getTraitList("Orange"), new Location("Utown"),
+    public static Cat[] getSampleCats() {
+        return new Cat[] {
+            new Cat(new Name("Bowie"), getTraitList("Orange"), new Location("Utown"),
                 new Health("Vaccinated")),
-            new Person(new Name("Mochi"), getTraitList("White", "Fluffy"), new Location("Science"),
+            new Cat(new Name("Mochi"), getTraitList("White", "Fluffy"), new Location("Science"),
                 new Health("Unknown")),
-            new Person(new Name("Luna"), getTraitList("Black"), new Location("PGP"),
+            new Cat(new Name("Luna"), getTraitList("Black"), new Location("PGP"),
                 new Health("Vaccinated")),
-            new Person(new Name("Kiki"), getTraitList("Tabby", "short tail"), new Location("SDE"),
+            new Cat(new Name("Kiki"), getTraitList("Tabby", "short tail"), new Location("SDE"),
                 new Health("Healthy")),
-            new Person(new Name("Pipi"), getTraitList("Calico"), new Location("Biz"),
+            new Cat(new Name("Pipi"), getTraitList("Calico"), new Location("Biz"),
                 new Health("Unknown")),
-            new Person(new Name("Simba"), getTraitList("Brown"), new Location("FASS"),
+            new Cat(new Name("Simba"), getTraitList("Brown"), new Location("FASS"),
                 new Health("Unknown"))
         };
     }
@@ -41,8 +42,8 @@ public class SampleDataUtil {
      */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Cat sampleCat : getSampleCats()) {
+            sampleAb.addCat(sampleCat);
         }
         return sampleAb;
     }

@@ -19,46 +19,46 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TRAIT_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRAIT_ORANGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalCats.AMY;
+import static seedu.address.testutil.TypicalCats.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Health;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Trait;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.cat.Cat;
+import seedu.address.model.cat.Health;
+import seedu.address.model.cat.Location;
+import seedu.address.model.cat.Name;
+import seedu.address.model.cat.Trait;
+import seedu.address.testutil.CatBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTraits(VALID_TRAIT_ORANGE).build();
+        Cat expectedCat = new CatBuilder(BOB).withTraits(VALID_TRAIT_ORANGE).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + TRAIT_DESC_ORANGE
-                + LOCATION_DESC_BOB + HEALTH_DESC_BOB, new AddCommand(expectedPerson));
+                + LOCATION_DESC_BOB + HEALTH_DESC_BOB, new AddCommand(expectedCat));
 
         // multiple traits - all accepted (up to 3)
-        Person expectedPersonMultipleTraits = new PersonBuilder(BOB)
+        Cat expectedCatMultipleTraits = new CatBuilder(BOB)
                 .withTraits(VALID_TRAIT_FLUFFY, VALID_TRAIT_ORANGE).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + TRAIT_DESC_FLUFFY + TRAIT_DESC_ORANGE + LOCATION_DESC_BOB + HEALTH_DESC_BOB,
-                new AddCommand(expectedPersonMultipleTraits));
+                new AddCommand(expectedCatMultipleTraits));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // health is optional - defaults to Unknown
-        Person expectedPerson = new PersonBuilder(AMY).withHealth(Health.DEFAULT_VALUE)
+        Cat expectedCat = new CatBuilder(AMY).withHealth(Health.DEFAULT_VALUE)
                 .withTraits(VALID_TRAIT_ORANGE).build();
         assertParseSuccess(parser, NAME_DESC_AMY + TRAIT_DESC_ORANGE + LOCATION_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedCat));
     }
 
     @Test

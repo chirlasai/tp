@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRAIT_FLUFFY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BOWIE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCats.BOWIE;
+import static seedu.address.testutil.TypicalCats.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.cat.Cat;
+import seedu.address.model.cat.exceptions.DuplicateCatException;
+import seedu.address.testutil.CatBuilder;
 
 public class AddressBookTest {
 
@@ -28,7 +28,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getCatList());
     }
 
     @Test
@@ -44,64 +44,64 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedBowie = new PersonBuilder(BOWIE).withLocation(VALID_LOCATION_BOB).withTraits(VALID_TRAIT_FLUFFY)
+    public void resetData_withDuplicateCats_throwsDuplicateCatException() {
+        // Two cats with the same identity fields
+        Cat editedBowie = new CatBuilder(BOWIE).withLocation(VALID_LOCATION_BOB).withTraits(VALID_TRAIT_FLUFFY)
                 .build();
-        List<Person> newPersons = Arrays.asList(BOWIE, editedBowie);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Cat> newCats = Arrays.asList(BOWIE, editedBowie);
+        AddressBookStub newData = new AddressBookStub(newCats);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateCatException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasCat_nullCat_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasCat(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(BOWIE));
+    public void hasCat_catNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasCat(BOWIE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(BOWIE);
-        assertTrue(addressBook.hasPerson(BOWIE));
+    public void hasCat_catInAddressBook_returnsTrue() {
+        addressBook.addCat(BOWIE);
+        assertTrue(addressBook.hasCat(BOWIE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(BOWIE);
-        Person editedBowie = new PersonBuilder(BOWIE).withLocation(VALID_LOCATION_BOB).withTraits(VALID_TRAIT_FLUFFY)
+    public void hasCat_catWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addCat(BOWIE);
+        Cat editedBowie = new CatBuilder(BOWIE).withLocation(VALID_LOCATION_BOB).withTraits(VALID_TRAIT_FLUFFY)
                 .build();
-        assertTrue(addressBook.hasPerson(editedBowie));
+        assertTrue(addressBook.hasCat(editedBowie));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getCatList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getCatList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{cats=" + addressBook.getCatList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose cats list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Cat> cats = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Cat> cats) {
+            this.cats.setAll(cats);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Cat> getCatList() {
+            return cats;
         }
     }
 

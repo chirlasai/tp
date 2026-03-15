@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRAIT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CATS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,11 +19,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Health;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Trait;
+import seedu.address.model.cat.Cat;
+import seedu.address.model.cat.Health;
+import seedu.address.model.cat.Location;
+import seedu.address.model.cat.Name;
+import seedu.address.model.cat.Trait;
 
 /**
  * Edits the details of an existing cat in the cat notebook.
@@ -44,59 +44,59 @@ public class EditCommand extends Command {
             + PREFIX_LOCATION + "Science "
             + PREFIX_HEALTH + "Vaccinated";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Cat: %1$s";
+    public static final String MESSAGE_EDIT_CAT_SUCCESS = "Edited Cat: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This cat already exists in the cat notebook.";
+    public static final String MESSAGE_DUPLICATE_CAT = "This cat already exists in the cat notebook.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditCatDescriptor editCatDescriptor;
 
     /**
-     * @param index of the cat in the filtered cat list to edit
-     * @param editPersonDescriptor details to edit the cat with
+     * @param index             of the cat in the filtered cat list to edit
+     * @param editCatDescriptor details to edit the cat with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditCatDescriptor editCatDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editCatDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editCatDescriptor = new EditCatDescriptor(editCatDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Cat> lastShownList = model.getFilteredCatList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CAT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Cat catToEdit = lastShownList.get(index.getZeroBased());
+        Cat editedCat = createEditedCat(catToEdit, editCatDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!catToEdit.isSameCat(editedCat) && model.hasCat(editedCat)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CAT);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.setCat(catToEdit, editedCat);
+        model.updateFilteredCatList(PREDICATE_SHOW_ALL_CATS);
+        return new CommandResult(String.format(MESSAGE_EDIT_CAT_SUCCESS, Messages.format(editedCat)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Cat} with the details of {@code catToEdit}
+     * edited with {@code editCatDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Cat createEditedCat(Cat catToEdit, EditCatDescriptor editCatDescriptor) {
+        assert catToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        List<Trait> updatedTraits = editPersonDescriptor.getTraits().orElse(personToEdit.getTraits());
-        Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
-        Health updatedHealth = editPersonDescriptor.getHealth().orElse(personToEdit.getHealth());
+        Name updatedName = editCatDescriptor.getName().orElse(catToEdit.getName());
+        List<Trait> updatedTraits = editCatDescriptor.getTraits().orElse(catToEdit.getTraits());
+        Location updatedLocation = editCatDescriptor.getLocation().orElse(catToEdit.getLocation());
+        Health updatedHealth = editCatDescriptor.getHealth().orElse(catToEdit.getHealth());
 
-        return new Person(updatedName, updatedTraits, updatedLocation, updatedHealth);
+        return new Cat(updatedName, updatedTraits, updatedLocation, updatedHealth);
     }
 
     @Override
@@ -112,14 +112,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editCatDescriptor.equals(otherEditCommand.editCatDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editCatDescriptor", editCatDescriptor)
                 .toString();
     }
 
@@ -127,22 +127,22 @@ public class EditCommand extends Command {
      * Stores the details to edit the cat with. Each non-empty field value will replace the
      * corresponding field value of the cat.
      */
-    public static class EditPersonDescriptor {
+    public static class EditCatDescriptor {
         private Name name;
         private List<Trait> traits;
         private Location location;
         private Health health;
 
         /**
-         * Creates an empty {@code EditPersonDescriptor} with no fields set.
+         * Creates an empty {@code EditCatDescriptor} with no fields set.
          */
-        public EditPersonDescriptor() {}
+        public EditCatDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code traits} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditCatDescriptor(EditCatDescriptor toCopy) {
             setName(toCopy.name);
             setTraits(toCopy.traits);
             setLocation(toCopy.location);
@@ -222,15 +222,15 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditCatDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(traits, otherEditPersonDescriptor.traits)
-                    && Objects.equals(location, otherEditPersonDescriptor.location)
-                    && Objects.equals(health, otherEditPersonDescriptor.health);
+            EditCatDescriptor otherEditCatDescriptor = (EditCatDescriptor) other;
+            return Objects.equals(name, otherEditCatDescriptor.name)
+                    && Objects.equals(traits, otherEditCatDescriptor.traits)
+                    && Objects.equals(location, otherEditCatDescriptor.location)
+                    && Objects.equals(health, otherEditCatDescriptor.health);
         }
 
         @Override

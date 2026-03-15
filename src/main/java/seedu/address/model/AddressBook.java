@@ -6,16 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.cat.Cat;
+import seedu.address.model.cat.UniqueCatList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameCat comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueCatList cats;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,13 +25,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        cats = new UniqueCatList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Cats in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -41,11 +41,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the cat list with {@code cats}.
+     * {@code cats} must not contain duplicate cats.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setCats(List<Cat> cats) {
+        this.cats.setCats(cats);
     }
 
     /**
@@ -54,44 +54,44 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setCats(newData.getCatList());
     }
 
-    //// person-level operations
+    //// cat-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a cat with the same identity as {@code cat} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasCat(Cat cat) {
+        requireNonNull(cat);
+        return cats.contains(cat);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a cat to the address book.
+     * The cat must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addCat(Cat p) {
+        cats.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given cat {@code target} in the list with {@code editedCat}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The cat identity of {@code editedCat} must not be the same as another existing cat in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setCat(Cat target, Cat editedCat) {
+        requireNonNull(editedCat);
 
-        persons.setPerson(target, editedPerson);
+        cats.setCat(target, editedCat);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeCat(Cat key) {
+        cats.remove(key);
     }
 
     //// util methods
@@ -99,13 +99,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("cats", cats)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Cat> getCatList() {
+        return cats.asUnmodifiableObservableList();
     }
 
     @Override
@@ -120,11 +120,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return cats.equals(otherAddressBook.cats);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return cats.hashCode();
     }
 }

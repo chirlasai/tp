@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Health;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Trait;
+import seedu.address.model.cat.Cat;
+import seedu.address.model.cat.Health;
+import seedu.address.model.cat.Location;
+import seedu.address.model.cat.Name;
+import seedu.address.model.cat.Trait;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -48,8 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Enforce single name and single location (no duplicate prefixes)
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_LOCATION);
 
-        // Duplicate location detection: verifyNoDuplicatePrefixesFor above handles l/
-        // Duplicate health detection: health is optional, take last if duplicated (or restrict)
+        // Duplicate health detection: health is optional, restrict to one
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEALTH);
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -64,8 +63,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             health = new Health(Health.DEFAULT_VALUE);
         }
 
-        Person person = new Person(name, traits, location, health);
-        return new AddCommand(person);
+        Cat cat = new Cat(name, traits, location, health);
+        return new AddCommand(cat);
     }
 
     /**

@@ -1,29 +1,26 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BOWIE;
-import static seedu.address.testutil.TypicalPersons.LUNA;
-import static seedu.address.testutil.TypicalPersons.MOCHI;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCats.BOWIE;
+import static seedu.address.testutil.TypicalCats.LUNA;
+import static seedu.address.testutil.TypicalCats.MOCHI;
+import static seedu.address.testutil.TypicalCats.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.cat.NameContainsKeywordsPredicate;
 
-/**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
- */
 public class FindCommandTest {
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -38,54 +35,48 @@ public class FindCommandTest {
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertEquals(findFirstCommand, findFirstCommand);
 
         // same values -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertEquals(findFirstCommand, findFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        org.junit.jupiter.api.Assertions.assertNotEquals(1, findFirstCommand);
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        org.junit.jupiter.api.Assertions.assertNotEquals(null, findFirstCommand);
 
-        // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        // different command -> returns false
+        org.junit.jupiter.api.Assertions.assertNotEquals(findFirstCommand, findSecondCommand);
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_noMatchingKeywords_noPersonFound() {
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("NonExistentCatName"));
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        CommandException thrown = assertThrows(CommandException.class, () -> command.execute(model));
+        assertEquals(FindCommand.MESSAGE_NO_MATCH, thrown.getMessage());
+        org.junit.jupiter.api.Assertions.assertTrue(model.getFilteredCatList().isEmpty());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleCatsFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("Bowie Mochi Luna");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BOWIE, MOCHI, LUNA), model.getFilteredPersonList());
-    }
-
-    @Test
-    public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
+        expectedModel.updateFilteredCatList(predicate);
+        assertCommandSuccess(command, model, FindCommand.MESSAGE_SUCCESS, expectedModel);
+        assertEquals(Arrays.asList(BOWIE, MOCHI, LUNA), model.getFilteredCatList());
     }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new NameContainsKeywordsPredicate(
+                Arrays.asList(userInput.trim().split("\\s+")));
     }
+
 }
