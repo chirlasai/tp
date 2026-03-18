@@ -1,6 +1,4 @@
----
-span
----
+
 ![banner](../docs/images/CatPals_banner.png)
 This project is a **brownfield** software engineering project developed by a team of five,
 based on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/),
