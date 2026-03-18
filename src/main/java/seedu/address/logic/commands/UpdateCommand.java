@@ -33,9 +33,9 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the cat identified "
-            + "by the index number used in the displayed cat list. "
+            + "by the index number used in the displayed cat list, or by its name. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) | NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TRAIT + "TRAIT]... "
             + "[" + PREFIX_LOCATION + "LOCATION] "
@@ -44,11 +44,13 @@ public class UpdateCommand extends Command {
             + PREFIX_LOCATION + "Science "
             + PREFIX_HEALTH + "Vaccinated";
 
-    public static final String MESSAGE_EDIT_CAT_SUCCESS = "Edited Cat: %1$s";
+    public static final String MESSAGE_EDIT_CAT_SUCCESS = "Updated Cat: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CAT = "This cat already exists in the cat notebook.";
+    public static final String MESSAGE_INVALID_CAT_NAME = "The cat name provided is invalid";
 
     private final Index index;
+    private final Name targetName;
     private final EditCatDescriptor editCatDescriptor;
 
     /**
@@ -60,6 +62,20 @@ public class UpdateCommand extends Command {
         requireNonNull(editCatDescriptor);
 
         this.index = index;
+        this.targetName = null;
+        this.editCatDescriptor = new EditCatDescriptor(editCatDescriptor);
+    }
+
+    /**
+     * @param targetName        name of the cat in the address book to edit
+     * @param editCatDescriptor details to edit the cat with
+     */
+    public UpdateCommand(Name targetName, EditCatDescriptor editCatDescriptor) {
+        requireNonNull(targetName);
+        requireNonNull(editCatDescriptor);
+
+        this.index = null;
+        this.targetName = targetName;
         this.editCatDescriptor = new EditCatDescriptor(editCatDescriptor);
     }
 
@@ -68,11 +84,18 @@ public class UpdateCommand extends Command {
         requireNonNull(model);
         List<Cat> lastShownList = model.getFilteredCatList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CAT_DISPLAYED_INDEX);
+        Cat catToEdit;
+        if (index != null) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_CAT_DISPLAYED_INDEX);
+            }
+            catToEdit = lastShownList.get(index.getZeroBased());
+        } else {
+            catToEdit = model.getAddressBook().getCatList().stream()
+                    .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
+                    .findFirst()
+                    .orElseThrow(() -> new CommandException(MESSAGE_INVALID_CAT_NAME));
         }
-
-        Cat catToEdit = lastShownList.get(index.getZeroBased());
         Cat editedCat = createEditedCat(catToEdit, editCatDescriptor);
 
         if (!catToEdit.isSameCat(editedCat) && model.hasCat(editedCat)) {
@@ -111,7 +134,8 @@ public class UpdateCommand extends Command {
         }
 
         UpdateCommand otherUpdateCommand = (UpdateCommand) other;
-        return index.equals(otherUpdateCommand.index)
+        return Objects.equals(index, otherUpdateCommand.index)
+                && Objects.equals(targetName, otherUpdateCommand.targetName)
                 && editCatDescriptor.equals(otherUpdateCommand.editCatDescriptor);
     }
 

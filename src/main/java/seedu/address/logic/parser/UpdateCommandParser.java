@@ -17,6 +17,7 @@ import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.EditCatDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.cat.Trait;
+import seedu.address.model.cat.Name;
 
 /**
  * Parses input arguments and creates a new UpdateCommand object
@@ -33,12 +34,38 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TRAIT, PREFIX_LOCATION, PREFIX_HEALTH);
 
-        Index index;
+        String preamble = argMultimap.getPreamble().trim();
+        if (preamble.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
+        }
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
+        boolean hasAnyFieldPrefixes = argMultimap.getValue(PREFIX_NAME).isPresent()
+                || argMultimap.getValue(PREFIX_LOCATION).isPresent()
+                || argMultimap.getValue(PREFIX_HEALTH).isPresent()
+                || !argMultimap.getAllValues(PREFIX_TRAIT).isEmpty();
+
+        Index index = null;
+        Name targetName = null;
+
+        if (!hasAnyFieldPrefixes) {
+            try {
+                index = ParserUtil.parseIndex(preamble);
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
+            }
+        } else {
+            try {
+                index = ParserUtil.parseIndex(preamble);
+            } catch (ParseException pe) {
+                if (preamble.matches("-?\\d+")) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
+                }
+                try {
+                    targetName = ParserUtil.parseName(preamble);
+                } catch (ParseException ne) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), ne);
+                }
+            }
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_LOCATION, PREFIX_HEALTH);
@@ -60,7 +87,9 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             throw new ParseException(UpdateCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new UpdateCommand(index, editCatDescriptor);
+        return (index != null)
+                ? new UpdateCommand(index, editCatDescriptor)
+                : new UpdateCommand(targetName, editCatDescriptor);
     }
 
     /**
