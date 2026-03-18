@@ -53,17 +53,16 @@ Type a command in the command box and press **Enter** to execute it.
 
 ### Command Summary
 
-| Command                    | Format                                                                  | Example                                             |
-|----------------------------|-------------------------------------------------------------------------|-----------------------------------------------------|
-| **Add** a cat              | `add n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]`      | `add n/Bowie t/Orange l/Utown h/Vaccinated`         |
-| **List** all cat profiles  | `list`                                                                  | `list`                                              |
-| **Update** a cat profile   | `update INDEX n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]` | `update 1 n/Brown ` or `update Brown n/Bigguy t/Purple` |
-| **Find** cats by name      | `find CAT_NAME`                                                         | `find Snowy`                                        |
-| Find cats by traits        | `findtrait TRAIT [MORE_TRAITS]…`                                        | `findtrait white` or `findtrait white small`        |
-| **Delete** a cat profile   | `delete INDEX`                                                          | `delete 3`                                          |
-| **Clear** all cat profiles | `clear`                                                                 | `clear`                                             |
-| **Help**                   | `help`                                                                  | `help`                                              |
-| **Exit**                   | `exit`                                                                  | `exit`                                              |
+| Command                   | Format                                                                               | Example                                                 |
+|---------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------|
+| **Add** a cat             | `add n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]`                   | `add n/Bowie t/Orange l/Utown h/Vaccinated`             |
+| **List** all contacts     | `list`                                                                               | `list`                                                  |
+| **Update** a contact      | `update INDEX(or NAME) n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]` | `update 1 n/Brown ` or `update Brown n/Bigguy t/Purple` |
+| **Find** contacts by name | `find KEYWORD [MORE_KEYWORDS]`                                                       | `find John`                                             |
+| **Delete** a contact      | `delete INDEX(or NAME)`                                                              | `delete 3` or `delete Brown`                            |
+| **Clear** all contacts    | `clear`                                                                              | `clear`                                                 |
+| **Help**                  | `help`                                                                               | `help`                                                  |
+| **Exit**                  | `exit`                                                                               | `exit`                                                  |
 
 ### Notes
 - Parameters in `UPPER_CASE` are supplied by the user (e.g. `n/NAME` → `n/Snowy`).
