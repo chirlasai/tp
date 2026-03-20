@@ -1,9 +1,14 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -13,9 +18,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.cat.Cat;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -168,6 +177,10 @@ public class MainWindow extends UiPart<Stage> {
         return catListPanel;
     }
 
+    private static final String UPDATE_CONFIRMATION_HEADER =
+            "Are you sure you want to update this cat entry to: ";
+    private static final String UPDATE_CONFIRMATION_HINT = "\n\nPress Enter to confirm, Esc to cancel.";
+
     /**
      * Executes the command and returns the result.
      *
@@ -175,7 +188,20 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            Command command = logic.parseCommand(commandText);
+
+            // Show confirmation dialog for update commands
+            if (command instanceof UpdateCommand) {
+                Optional<Cat> preview = logic.getUpdatePreview(command);
+                if (preview.isPresent()) {
+                    boolean confirmed = showUpdateConfirmationDialog(preview.get());
+                    if (!confirmed) {
+                        return CommandResult.cancelled();
+                    }
+                }
+            }
+
+            CommandResult commandResult = logic.executeCommand(command);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -193,5 +219,49 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Shows a confirmation dialog for update commands.
+     * Enter confirms, Esc cancels. No buttons - user presses keys.
+     *
+     * @param updatedEntry the cat entry that would result from the update
+     * @return true if the user confirmed, false if cancelled
+     */
+    private boolean showUpdateConfirmationDialog(Cat updatedEntry) {
+        String content = UPDATE_CONFIRMATION_HEADER + Messages.format(updatedEntry) + "?"
+                + UPDATE_CONFIRMATION_HINT;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(primaryStage);
+        alert.setTitle("Confirm Update");
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+
+        // Hide OK and Cancel buttons - user presses Enter/Esc instead
+        alert.setOnShown(event -> {
+            var okButton = alert.getDialogPane().lookupButton(ButtonType.OK);
+            var cancelButton = alert.getDialogPane().lookupButton(ButtonType.CANCEL);
+            if (okButton != null) {
+                okButton.setVisible(false);
+            }
+            if (cancelButton != null) {
+                cancelButton.setVisible(false);
+            }
+        });
+
+        // Handle Enter = confirm, Esc = cancel
+        alert.getDialogPane().getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                alert.setResult(ButtonType.OK);
+                e.consume();
+            } else if (e.getCode() == KeyCode.ESCAPE) {
+                alert.setResult(ButtonType.CANCEL);
+                e.consume();
+            }
+        });
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 }

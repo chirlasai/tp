@@ -1,9 +1,11 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,6 +24,30 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Parses the command text into a Command without executing it.
+     * @param commandText The command as entered by the user.
+     * @return the parsed command.
+     * @throws ParseException If an error occurs during parsing.
+     */
+    Command parseCommand(String commandText) throws ParseException;
+
+    /**
+     * Executes a pre-parsed command and returns the result.
+     * @param command The command to execute.
+     * @return the result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    CommandResult executeCommand(Command command) throws CommandException;
+
+    /**
+     * Returns a preview of the cat that would result from an update command, if the given command is an UpdateCommand.
+     * @param command The parsed command.
+     * @return Optional containing the edited cat preview, or empty if the command is not an UpdateCommand.
+     * @throws CommandException If an error occurs while getting the preview (e.g. invalid index).
+     */
+    Optional<Cat> getUpdatePreview(Command command) throws CommandException;
 
     /**
      * Returns the AddressBook.
