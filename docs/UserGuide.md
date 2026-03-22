@@ -4,14 +4,35 @@ title: User Guide
 ---
 ![banner](../docs/images/CatPals_banner.png)
 
-## Table of Contents
-
-- [About CatPals](#about-catpals)
-- [Quick start](#quick-start)
-- [Features](#features)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
+# Table of Contents
+<!-- TOC -->
+* [Table of Contents](#table-of-contents)
+  * [About CatPals](#about-catpals)
+    * [What is CatPals?](#what-is-catpals)
+    * [What is the background of this project?](#what-is-the-background-of-this-project)
+    * [Why is this app needed?](#why-is-this-app-needed)
+    * [Who are the target users?](#who-are-the-target-users)
+    * [How do users interact with CatPals?](#how-do-users-interact-with-catpals)
+    * [What value does CatPals provide?](#what-value-does-catpals-provide)
+    * [What is CatPals not designed for?](#what-is-catpals-not-designed-for)
+    * [Where can you find more information?](#where-can-you-find-more-information)
+  * [Getting Started](#getting-started)
+  * [Features](#features)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a cat: `add`](#adding-a-cat-add)
+    * [Listing all cats: `list`](#listing-all-cats-list)
+    * [Updating a cat profile : `update`](#updating-a-cat-profile--update)
+    * [Locating cats by name, location, traits or health status : `find`](#locating-cats-by-name-location-traits-or-health-status--find)
+    * [Deleting a cat : `delete`](#deleting-a-cat--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 ---
 
@@ -83,24 +104,61 @@ For more details about the project, please visit the **[CatPals Website](https:/
 
 ---
 
-## Quick start
+## Getting Started
+If you are new to using desktop applications or command-line interfaces, don't worry! This guide will walk you through the steps to get CatPals up and running on your computer. Just follow the instructions carefully, and you'll be managing cat profiles in no time.
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-3. Copy the file to the folder you want to use as the _home folder_ for your CatPals.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar catpals.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+---
+**Step 1: Check Your Java Version**
+
+Before starting, your computer needs a specific version of **Java** (think of it as the engine) to run this app.
+
+* **On Windows:** Click your **Start** menu, type `cmd`, and press **Enter**. A black window will open. Type `java -version` and press **Enter**.
+* **On Mac:** Press **Command + Space**, type `Terminal`, and press **Enter**. Type `java -version` and press **Enter**.
+* Result: You should see something like `java version "17.0.1"`. If you see a version number less than 17, or an error message, you will need to install Java 17 or above.
+
+---
+
+**Step 2: Download the App and prepare CatPals folder**
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T16-3/tp/releases/tag/branch-release1.0).
+2.  **Create a new folder** on your Desktop or in your Documents and name it `CatPals`or any other name you prefer.
+3.  **Move** the downloaded file into this new folder.
+
+---
+
+**Step 3: Open the Terminal in Your Folder**
+Instead of clicking an icon, we need to tell the computer to "look" inside your `CatPals` folder using text.
+ 
+**For Windows Users:**
+1.  Open your folder where the jar file is located.
+2.  Click the **Address Bar** at the top of the window (the long white bar that shows the folder path).
+3.  Delete everything in that bar, type `cmd`, and press **Enter**.
+4.  A black window will pop up that is already "inside" your folder.
+
+**For Mac Users:**
+1.  Find your `CatPals` folder icon.
+2.  **Right-click** (or Control-click) the folder icon.
+3.  Select **New Terminal at Folder** from the menu.
+
+---
+
+**Step 4: Run the Application**
+Now that the terminal window is open, simply type the following command exactly as it appears and press **Enter**:
+
+`java -jar catpals.jar`
+
+> **Note:** If the file you downloaded has a different name (like `catpals-v1.2.jar`), make sure you type that exact name after the `-jar` part!
+
+**Step 5: Start Using CatPals!**
+If the app runs successfully, you should see a window pop up with a list of cats and a command box at the bottom. You can start typing commands to manage your cat profiles. For example, try typing `help` and pressing Enter to see the help message.
+
+Some example commands you can try:
 
    * `list` : Lists all contacts.
    * `add n/Bowie t/Orange l/Utown h/Vaccinated` : Adds a cat named `Bowie` to the cat notebook.
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    * `clear` : Deletes all contacts.
-   * `exit` : Exits the app.
-6. Refer to the [Features](#features) below for details of each command.
+   * `exit` : Exits the app. 
+Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -173,39 +231,43 @@ Examples:
 * `update 1 n/Brownie t/Brown` Updates the name and trait of the 1st cat to be `Brownie` and `Brown` respectively.
 * `update Bronwie n/Brownie t/Brown` Updates the name of the cat with current name `Bronwie` to be `Brownie` and its trait to be `Brown`.
 
-### Locating cats by name: `find`
+### Locating cats by name, location, traits or health status : `find`
 
-Use the `find` command to search for cats by their names.
+The `find` command is a powerful tool to quickly filter the CatPals database. You can now search for cats based on their **Name**, **Location**, **Traits**, or **Health Status**.
 
-Format: `find CAT_NAME`
+Format: `find n/CAT_NAME`, `find l/LOCATION`, `find t/TRAIT`, or `find h/HEALTH_STATUS`
 
-Things to note:
 
-* The search is **case-sensitive**, which means uppercase and lowercase letters are treated differently. For example, `snowy` will **not** match `Snowy`.
-* The order of the keywords does **not** matter. For example, `Snowy White` will match `White Snowy`.
-* You can search using part of a name. For example, `Han` will match `Hans`.
-* A cat will be shown as long as its name matches **at least one** of the keywords you entered. This means the app looks for **any matching keyword**, not necessarily all of them. For example, `Hans Momo` will return `Hans Gruber` and `Momo`.
-* The name field cannot be empty.
-* Names cannot contain symbols.
+**How it works:**
+* The search is case-sensitive. e.g `snowy` will **NOT** match `Snowy`
+* The order of the keywords **do not** matter. e.g. `Snowy White` will match `White Snowy`
+* Cats matching at least one keyword will be returned (i.e. `OR` search).
+  * e.g. `find n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+* Search terms cannot contain symbols
 
-Examples:
+**Examples:**
 
-* `find Snowy` returns `Snowy` and `Snowy White`
-* `find Momo Luna` returns `Momo` and `Luna`
 
-### Finding cats by their traits: `findtrait`
+| Category      | Prefix | Example Command | Expected Result                                |
+|---------------|--------|-----------------|------------------------------------------------|
+| Name          | n/     | find n/Snowy    | Shows cats with the word `Snowy` in their name |
+| Location      | l/     | find l/COM3     | Shows all cats that are at `COM3`              |
+| Traits        | t/     | find t/Striped  | Shows all cats that have the trait `Striped`   |
+| Health Status | h/     | find h/healthy  | Shows all cats that are tagged as `healthy`     |
 
-Finds cats whose traits contain any of the given keywords.
+**Advanced Examples:**
 
-Format: `findtrait TRAIT`
+* **Searching for multiple traits:** `find t/Friendly t/Playful`
+  Matches any cat that is marked as either Friendly OR Playful.
+* **Finding names with multiple keywords:**`find n/Alex n/Li`
+  Matches cats named Alex as well as cats with the last name Li (e.g., Jet Li).
+* **Combining categories:** `find n/Snowy t/Fluffy`
+  Matches any cat that has the name Snowy OR is tagged as Fluffy.
+* **Searching by partial location:**`find l/Arts`
+  Matches cats at Arts Canteen, Arts Plaza, etc.
 
-* The search is case-sensitive. e.g `orange` will NOT match `Orange`
-* The order of the keywords does not matter. e.g. `orange small` will match `small orange` and `orange small`
-
-Examples:
-
-* `findtrait Orange` returns all cats with the trait `Orange`
-* `findtrait Orange Small` returns all cats with the trait `Orange` or `Small`
+>[!IMPORTANT]
+> Ensure there is no space between the prefix (like n/) and your search word. For example, use n/Snowy, not n/ Snowy.
 
 ### Deleting a cat : `delete`
 
@@ -275,8 +337,7 @@ _Details coming soon ..._
 | **Add** a cat                     | `n/[NAME] t/[TRAIT]... l/[LOCATION] {h/[HEALTH_STATUS]}`                       | `add n/Bowie t/Orange l/Utown h/Vaccinated` |
 | **Delete** a cat by name or index | `delete [CAT_NAME]`or `delete [CAT_NUMBER]`                                    | `delete Snowy` or `delete 3`                |
 | **Edit** a cat by name or index   | `Update [CAT_NAME] [UPDATED_STATUS]` or `Update [CAT_NUMBER] [UPDATED_STATUS]` | `Update Snowy l/utown` or `Update 3 l/PGPR` |
-| **Find** a cat name               | `find [CAT_NAME]`                                                              | `find Snowy`                                |
-| **Findtrait** a cat by trait(s)   | `find [CAT_TRAIT]...`                                                          | `findtrait white small`                     |
+| **Find** cats | `find n/CAT_NAME` or `find l/LOCATION` or `find t/TRAIT` or `find h/HEALTH_STATUS`    | `find n/Mochi` or `find t/Striped` or `find l/COM3` or `find h/Sick` |
 | **Clear** all cats                | `clear`                                                                        | `clear`                                     |
 | **List** all cats                 | `list`                                                                         | `list`                                      |
 | **Help**                          | `help`                                                                         | `help`                                      |
