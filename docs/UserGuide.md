@@ -2,26 +2,85 @@
 layout: page
 title: User Guide
 ---
-![banner](images/CatPals_banner.png)
-This project is a **brownfield** software engineering project developed by a team of five,
-based on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/),
-a sample desktop application provided by CS2103T course team, AY2526 Sem2.
-In the sample project, AB3 simulates an ongoing software project with an existing object-oriented codebase, documentation, and architecture, making it a suitable foundation for extension rather than building a product from scratch.
-<br>
-<br>
-Building on this base, our team adapted the original contact-management application into a desktop app for NUS Cate Cafe CCA volunteers to manage information about stray cats on the NUS campus. The app is designed for users who prefer fast keyboard-based interaction, are comfortable with CLI-style workflows, and need an efficient way to identify cats and keep important status details up to date.
-<br>
-<br>
-It is intended for personal or small-team volunteer use, rather than as a veterinary medical system, shelter operations tool, or public registry.
-
-For the detailed documentation of this project, see the **[Cat Pals Website](https://ay2526s2-cs2103t-t16-3.github.io/tp/)**.
+![banner](../docs/images/CatPals_banner.png)
 
 ## Table of Contents
+
+- [About CatPals](#about-catpals)
 - [Quick start](#quick-start)
 - [Features](#features)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
+
+---
+
+## About CatPals
+
+### What is CatPals?
+
+CatPals is a **desktop application** created for **NUS Cat Café volunteers** who need a fast and reliable way to manage information about stray cats on the NUS campus.
+
+Instead of managing people’s contact details, CatPals helps volunteers record, search for, and update important information about stray cats around campus. This makes it easier to identify individual cats, track their status, and keep records accurate over time.
+
+### What is the background of this project?
+
+CatPals was not built entirely from scratch. Instead, our team started from an existing sample application and adapted it for a new purpose. In software engineering, this is called a **brownfield project**. This simply means that we improved and repurposed an existing app instead of creating a completely new one from zero.
+
+Our team of five used [**AddressBook Level 3 (AB3)**](https://se-education.org/addressbook-level3/) as the starting point for this project. AB3 is a sample desktop application provided by the CS2103T teaching team in AY2526 Semester 2. It gave us a base structure that we could build on, and we then redesigned it to better suit the needs of NUS Cat Café volunteers.
+
+### Why is this app needed?
+
+CatPals is designed for volunteers who may need to manage information for a **large number of cats** across different parts of the NUS campus. When there are many cats to keep track of, it becomes difficult to rely only on memory, scattered notes, or chat messages.
+
+A centralised app helps volunteers work in a more organised and consistent way. It can reduce confusion, make records easier to update, and support smoother coordination, especially when multiple volunteers are caring for or monitoring the same cats.
+
+### Who are the target users?
+
+CatPals is especially suitable for users who:
+
+- are members of **NUS Cat Café CCA**
+- need to keep track of a significant number of stray cats on the NUS campus
+- prefer using a **desktop app** rather than mobile apps or paper notes
+- can type reasonably quickly
+- prefer typing over repeated mouse clicking
+- are comfortable with simple command-based interaction
+
+In general, CatPals is intended for users who value **speed, efficiency, and organisation**. It is especially useful for volunteers who want quick access to cat records and a reliable way to keep key details up to date.
+
+### How do users interact with CatPals?
+
+CatPals is built around a **CLI-style workflow**. **CLI** stands for **Command Line Interface**, which means users mainly interact with the app by typing commands instead of clicking through many buttons or menus.
+
+This may sound technical at first, but in practice, it simply means that common tasks can often be done **faster** once users become familiar with a few basic commands. For volunteers who are comfortable using the keyboard, this can make day-to-day work much more efficient.
+
+The app does **not** assume that users are computer experts. However, it does assume that users are reasonably comfortable following instructions, entering commands accurately, and using a desktop-based workflow.
+
+### What value does CatPals provide?
+
+CatPals provides **fast, keyboard-friendly access** to information about stray cats living on the NUS campus. This helps volunteers:
+
+- identify cats more reliably
+- keep important status details updated
+- manage records in a more organised way
+- work more efficiently during volunteer activities
+
+CatPals is designed for **personal use**. It is not meant to replace professional systems used in clinics, shelters, or public organisations.
+
+### What is CatPals not designed for?
+
+CatPals is **not** intended to be:
+
+- a veterinary medical system
+- a shelter operations platform
+- a public registry for stray cats
+
+Instead, it is a practical record-management tool built specifically for the needs of NUS Cat Café volunteers.
+
+### Where can you find more information?
+
+For more details about the project, please visit the **[CatPals Website](https://ay2526s2-cs2103t-t16-3.github.io/tp/)**.
+
 
 ---
 
@@ -138,8 +197,8 @@ Examples:
 * `find Alex Li` returns `Alex`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-
 ### Finding cats by their traits: `findtrait`
+
 Finds cats whose traits contain any of the given keywords.
 
 Format: `findtrait TRAIT`
@@ -214,12 +273,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]` <br> e.g., `add n/Bowie t/Orange l/Utown h/Vaccinated`
-**Clear** | `clear`
-**Delete** | `delete INDEX(or NAME)`<br> e.g., `delete 3` or `delete Brown`
-**Update** | `update INDEX(or NAME) [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`update 2 n/James Lee e/jameslee@example.com` or `update Brown n/Bigguy t/Purple`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+
+| Command                           | Format                                                                         | Examples                                    |
+| --------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------- |
+| **Add** a cat                     | `n/[NAME] t/[TRAIT]... l/[LOCATION] {h/[HEALTH_STATUS]}`                       | `add n/Bowie t/Orange l/Utown h/Vaccinated` |
+| **Delete** a cat by name or index | `delete [CAT_NAME]`or `delete [CAT_NUMBER]`                                    | `delete Snowy` or `delete 3`                |
+| **Edit** a cat by name or index   | `Update [CAT_NAME] [UPDATED_STATUS]` or `Update [CAT_NUMBER] [UPDATED_STATUS]` | `Update Snowy l/utown` or `Update 3 l/PGPR` |
+| **Find** a cat name               | `find [CAT_NAME]`                                                              | `find Snowy`                                |
+| **Findtrait** a cat by trait(s)   | `find [CAT_TRAIT]...`                                                          | `findtrait white small`                     |
+| **Clear** all cats                | `clear`                                                                        | `clear`                                     |
+| **List** all cats                 | `list`                                                                         | `list`                                      |
+| **Help**                          | `help`                                                                         | `help`                                      |
+| **Exit**                          | `exit`                                                                         | `exit`                                      |
