@@ -1,5 +1,6 @@
 ---
-span
+layout: page
+title: User Guide
 ---
 ![banner](../docs/images/CatPals_banner.png)
 
@@ -95,10 +96,12 @@ For more details about the project, please visit the **[CatPals Website](https:/
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all cats.
-   * `add n/Bowie t/Orange l/Utown h/Vaccinated` : Adds a cat named `Bowie` to the CatPals.
-   * `delete 1` or `delete Bowie`: Deletes the 1st cat (Bowie) shown in the current list.
-   * `find Bowie`: Searches for a cat named `Bowie`.
+   * `list` : Lists all contacts.
+
+   * `add n/Bowie t/Orange l/Utown h/Vaccinated` : Adds a cat named `Bowie` to the cat notebook.
+
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
+
    * `clear` : Deletes all contacts.
    * `exit` : Exits the app.
 6. Refer to the [Features](#features) below for details of each command.
@@ -131,50 +134,54 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
 
-Adds a person to the address book.
+### Adding a cat: `add`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+Adds a cat profile to the cat notebook.
+
+Format: `add n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A cat can have up to 3 traits (no duplicates). Health status is optional and defaults to `Unknown` if not provided.
 </div>
 
+* `n/NAME`, `t/TRAIT`, and `l/LOCATION` are required.
+* `h/HEALTH_STATUS` is optional.
+* You can specify up to 3 `t/TRAIT` prefixes, but duplicate traits are not allowed.
+
 Examples:
+* `add n/Bowie t/Orange l/Utown h/Vaccinated`
+* `add n/Whiskers t/Fluffy t/Playful l/Science`
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+### Listing all cats: `list`
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
+Shows a list of all cats in the app.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Updating a cat profile : `update`
 
-Edits an existing person in the address book.
+Updates an existing cat in the app.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+Format:`update INDEX n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]`
+or 
+`update CURRENT_NAME n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
+* Updates the cat at the specified `INDEX` or `EXISTING_NAME`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `update 1 n/Brownie t/Brown` Updates the name and trait of the 1st cat to be `Brownie` and `Brown` respectively.
+* `update Bronwie n/Brownie t/Brown` Updates the name of the cat with current name `Bronwie` to be `Brownie` and its trait to be `Brown`.
 
-### Locating persons by name: `find`
+### Locating cats by name: `find`
 
 Finds cats whose names contain any of the given keywords.
 
-Format: `find [CAT_NAME]`
+Format: `find CAT_NAME`
 
 * The search is case-sensitive. e.g `snowy` will NOT match `Snowy`
 * The order of the keywords does not matter. e.g. `Snowy White` will match `White Snowy`
@@ -204,7 +211,7 @@ Examples:
 * `findtrait Orange` returns all cats with the trait `Orange`
 * `findtrait Orange Small` returns all cats with the trait `Orange` or `Small`
 
-### Deleting a person : `delete`
+### Deleting a cat : `delete`
 
 Deletes the specified person from the address book.
 
@@ -221,7 +228,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the app.
 
 Format: `clear`
 

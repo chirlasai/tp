@@ -53,23 +53,23 @@ Type a command in the command box and press **Enter** to execute it.
 
 ### Command Summary
 
-| Command                           | Format                                                                      | Examples                                    |
-|-----------------------------------|-----------------------------------------------------------------------------|---------------------------------------------|
-| **Add** a cat                     | `n/[NAME] t/[TRAIT]… l/[LOCATION] {h/[HEALTH_STATUS]}`                      | `add n/Bowie t/Orange l/Utown h/Vaccinated` |
-| **Delete** a cat by name or index | `delete [CAT_NAME]`or `delete [CAT_NUMBER]`                                 | `delete Snowy` or `delete 3`                |
-| **Edit** a cat by name or index   | `Update [CAT_NAME] [UPDATED_STATUS]` or `Update [CAT_NUMBER] [UPDATED_STATUS]` | `Update Snowy l/utown` or `Update 3 l/PGPR` |
-| **Find** a cat name               | `find KEYWORD`                                                              | `find Snowy`                                |
-| **Findtrait** a cat by trait(s)   | `find [CAT_TRAIT]...`                                                       | `findtrait white small`                     |
-| **Clear** all cats                | `clear`                                                                     | `clear`                                     |
-| **List** all cats                 | `list`                                                                      | `list`                                      |
-| **Help**                          | `help`                                                                      | `help`                                      |
-| **Exit** | `exit`                                                                      | `exit` |
+| Command                   | Format                                                                               | Example                                                 |
+|---------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------|
+| **Add** a cat             | `add n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]`                   | `add n/Bowie t/Orange l/Utown h/Vaccinated`             |
+| **List** all contacts     | `list`                                                                               | `list`                                                  |
+| **Update** a contact      | `update INDEX(or NAME) n/NAME t/TRAIT [t/MORE_TRAITS]… l/LOCATION [h/HEALTH_STATUS]` | `update 1 n/Brown ` or `update Brown n/Bigguy t/Purple` |
+| **Find** contacts by name | `find KEYWORD [MORE_KEYWORDS]`                                                       | `find John`                                             |
+| Find cats by trait         | `findtrait TRAIT [MORE_TRAITS]…`                                                   | `findtrait Orange` or `findtrait White Striped`          |
+| **Delete** a contact      | `delete INDEX(or NAME)`                                                              | `delete 3` or `delete Brown`                            |
+| **Clear** all contacts    | `clear`                                                                              | `clear`                                                 |
+| **Help**                  | `help`                                                                               | `help`                                                  |
+| **Exit**                  | `exit`                                                                               | `exit`                                                  |
 
 ### Notes
 - Parameters in `UPPER_CASE` are supplied by the user (e.g. `n/NAME` → `n/Snowy`).
-- Items in `{curly braces}` are optional.
+- Items in `[square brackets]` are optional.
 - Items followed by `…` can be used multiple times or omitted entirely.
-<br>e.g. `[t/TAG]…` can be used as `t/white`, `t/white t/small` etc.
+<br>e.g. `[t/TRAIT]…` can be used as `t/white`, `t/white t/small` etc.
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 <br>e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
