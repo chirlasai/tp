@@ -384,16 +384,16 @@ Format: `undo`
 
   | Recent Command                                                          | Effect of `undo`                                                                                           |
   |-------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-   | [`help`](#viewing-help--help)                                           | No action is reversed. `help` does not modify any data.                                                    |
+  | [`help`](#viewing-help--help)                                           | No action is reversed. `help` does not modify any data.                                                    |
   | [`add`](#adding-a-cat-add)                                              | Removes the cat that was most recently added to the cat list.                                              |
-    | [`attach`](#attaching-a-cat-photo-attach)                               | Detaches the photo that was most recently attached to the cat entry and delete the photo in the directory. |
-    | [`list`](#listing-all-cats-list)                                        | No action is reversed. `list` does not modify any data.                                                    |          |
-    | [`update`](#updating-a-cat-profile--update)                             | Reverts the most recently updated cat entry to its previous details.                                       |
-    | [`find`](#locating-cats-by-name-location-traits-or-health-status--find) | No action is reversed. `find` does not modify any data.                                                    |
-    | [`delete`](#deleting-a-cat--delete)                                     | Restores the most recently deleted cat entry back to the cat list.                                         |
-    | [`export`](#exporting-the-cat-list--export)                             | No action is reversed. `export` is a system-level command.                                                 |
-    | [`clear`](#clearing-all-entries--clear)                                 | No action is reversed. `clear` is a system-level command.                                                  |
-    | [`undo`](#undo-the-previous-action--undo)                               | Nothing happens. `undo` cannot be applied consecutively.                                                   |
+  | [`attach`](#attaching-a-cat-photo-attach)                               | Detaches the photo that was most recently attached to the cat entry and delete the photo in the directory. |
+  | [`list`](#listing-all-cats-list)                                        | No action is reversed. `list` does not modify any data.                                                    |
+  | [`update`](#updating-a-cat-profile--update)                             | Reverts the most recently updated cat entry to its previous details.                                       |
+  | [`find`](#locating-cats-by-name-location-traits-or-health-status--find) | No action is reversed. `find` does not modify any data.                                                    |
+  | [`delete`](#deleting-a-cat--delete)                                     | Restores the most recently deleted cat entry back to the cat list.                                         |
+  | [`export`](#exporting-the-cat-list--export)                             | No action is reversed. `export` is a system-level command.                                                 |
+  | [`clear`](#clearing-all-entries--clear)                                 | No action is reversed. `clear` is a system-level command.                                                  |
+  | [`undo`](#undo-the-previous-action--undo)                               | Nothing happens. `undo` cannot be applied consecutively.                                                   |
 >You can navigate to a feature's introduction by clicking its corresponding command snippet
 
 * `undo` can only reverse the most recently executed command. It cannot be applied consecutively to step back through multiple actions.
