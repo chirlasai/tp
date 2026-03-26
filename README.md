@@ -8,7 +8,12 @@
 ![license](https://img.shields.io/github/license/lang-jiaqi/tp.svg?color=bright-green)
 ![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)
 
-![Ui](docs/images/Ui.png)
+<p align="center">
+  <img src="docs/images/main_screen.png" alt="main_screen">
+  <br>
+  <em>This is the main screen of CatPals.</em>
+</p>
+
 
 ## Table of Contents
 
@@ -67,6 +72,7 @@ Type a command in the command box and press **Enter** to execute it.
 | **Exit**                          | `exit`                                                                             | `exit`                                                               |
 
 ### Notes
+- When commanding `list`, use up arrow :arrow_up: or :arrow_down: to navigate the list of cats.
 - Parameters in `UPPER_CASE` are supplied by the user (e.g. `n/NAME` → `n/Snowy`).
 - Items in `[square brackets]` are optional.
 - Items followed by `…` can be used multiple times or omitted entirely.
