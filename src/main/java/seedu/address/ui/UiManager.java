@@ -56,6 +56,15 @@ public class UiManager implements Ui {
                     mainWindow = new MainWindow(primaryStage, logic);
                     mainWindow.show();
                     mainWindow.fillInnerParts();
+
+                    // Deferred resize nudge: fixes layout shift (especially with
+                    // an empty cat list) by letting all pending runLater tasks in
+                    // fillInnerParts settle before forcing one final re-layout.
+                    Platform.runLater(() -> Platform.runLater(() -> {
+                        primaryStage.setWidth(primaryStage.getWidth() + 1);
+                        Platform.runLater(() ->
+                                primaryStage.setWidth(primaryStage.getWidth() - 1));
+                    }));
                 } catch (Throwable ex) {
                     logger.severe(StringUtil.getDetails(ex));
                     showFatalErrorDialogAndShutdown("Fatal error during initializing", ex);

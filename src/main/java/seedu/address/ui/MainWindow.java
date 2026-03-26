@@ -147,7 +147,12 @@ public class MainWindow extends UiPart<Stage> {
         // switching from the splash screen leaves some components unsized.
         Platform.runLater(() -> {
             primaryStage.setWidth(primaryStage.getWidth() + 1);
-            Platform.runLater(() -> primaryStage.setWidth(primaryStage.getWidth() - 1));
+            Platform.runLater(() -> {
+                primaryStage.setWidth(primaryStage.getWidth() - 1);
+                // Re-anchor the divider so the sidebar keeps its width even
+                // when the cat list is empty and has no content to hold it.
+                mainSplitPane.setDividerPositions(0.35);
+            });
         });
 
     }
