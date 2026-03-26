@@ -276,6 +276,8 @@ If the image file cannot be found at the given path, the cat's card will simply 
 ### Listing all cats: `list`
 
 Shows a list of all cats in the app.
+<br>
+:warning: By default, CatPals displays your list of cats in the left panel. You can use the keyboard up arrow :arrow_up: or down arrow :arrow_down: to browse through your cats.
 
 Format: `list`
 
@@ -336,7 +338,9 @@ Format: `find n/CAT_NAME`, `find l/LOCATION`, `find t/TRAIT`, or `find h/HEALTH_
   Matches any cat that is in COM3 AND is tagged as Fluffy.
 
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="block" class="alert alert-warning">
+:exclamation: 
+**Caution**:
 Ensure there is an identifier flag before each keyword if multiple are used. For example, use t/friendly t/white, 
 not t/friendly white.
 </div>  
