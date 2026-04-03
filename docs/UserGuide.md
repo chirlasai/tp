@@ -69,7 +69,7 @@ Type commands in the **command box** at the top (e.g. `add`, `find`, `update`). 
 
 ### What value does CatPals provide?
 
-CatPals offers fast lookup, consistent fields, **HTML export**, and **offline** use. It is not a vet system, shelter operations tool, or public registry — it is simply a practical notebook for volunteers.
+CatPals offers fast lookup, consistent fields, **HTML export**, and **offline** use. It is not a vet system, shelter operations tool, or public registry, it is simply a practical notebook for volunteers.
 
 ### Where can you find more information?
 
@@ -79,7 +79,7 @@ Visit the **[CatPals project site](https://ay2526s2-cs2103t-t16-3.github.io/tp/)
 
 ## Getting Started
 
-**Rough time:** About **10 minutes** if **Java 17+** is already installed. Add roughly **5 to 10 minutes** if you need to install Java first. All you need is a normal desktop computer and the steps below — no developer setup required.
+**Rough time:** About **10 minutes** if **Java 17+** is already installed. Add roughly **5 to 10 minutes** if you need to install Java first. All you need is a normal desktop computer and the steps below, no developer setup required.
 
 ---
 
@@ -94,7 +94,7 @@ Visit the **[CatPals project site](https://ay2526s2-cs2103t-t16-3.github.io/tp/)
 
 You should see a version number of **17** or higher (e.g. `17.0.x`). If the command is not recognised or the major version is below 17, install a current JDK:
 
-* **Recommended:** [Eclipse Temurin 17 (or newer)](https://adoptium.net/) — pick your OS, run the installer, then **open a new command window** and run `java -version` again to confirm.
+* **Recommended:** [Eclipse Temurin 17 (or newer)](https://adoptium.net/), pick your OS, run the installer, then **open a new command window** and run `java -version` again to confirm.
 * **Alternative:** [Oracle Java downloads](https://www.oracle.com/java/technologies/downloads/)
 
 ---
@@ -129,7 +129,7 @@ java -jar catpals.jar
 
 </div>
 
-You should see the **splash screen** first — press **Space** to open the main window ([tour below](#a-quick-tour-of-the-interface)).
+You should see the **splash screen** first, then press **Space** to open the main window ([tour below](#a-quick-tour-of-the-interface)).
 
 ---
 
@@ -153,12 +153,12 @@ CatPals uses a **warm, keyboard-friendly layout**: commands at the top, list on 
 
 ### Splash screen
 
-On launch you will see the welcome screen — press **Space** to continue.
+On launch, you will see the welcome screen. Simply press **Space** to continue.
 
 <p align="center">
   <img src="images/splash_screen.png" alt="CatPals splash screen" width="70%">
   <br>
-  <em>Welcome screen — press <strong>Space</strong> to open the main window.</em>
+  <em>Welcome screen. Simply press <strong>Space</strong> to open the main window.</em>
 </p>
 
 ### Main window
@@ -180,7 +180,7 @@ On launch you will see the welcome screen — press **Space** to continue.
 
 ### Navigating the cat list
 
-Use **↑** and **↓** to move the selection (works even when the cursor is in the command box). The detail panel updates automatically. **Clicking list rows does not select** — use the arrow keys. You can still **scroll** the list with the mouse wheel.
+Use **↑** and **↓** to move the selection (works even when the cursor is in the command box). The detail panel updates automatically. **Clicking list rows does not select**. Instead, use the arrow keys. You can still **scroll** the list with the mouse wheel.
 
 ---
 
@@ -304,7 +304,7 @@ attach Bowie images/bowie.png
 CatPals must be launched from the command window inside your `CatPals` folder (i.e. using `java -jar catpals.jar`) for relative image paths to work correctly. Double-clicking the `.jar` file may cause images not to load.
 </div>
 
-If the image file cannot be found at the given path, the cat's card will simply show no photo — the rest of the data is unaffected.
+If the image file cannot be found at the given path, the cat's card will simply show no photo, while the rest of the data is unaffected.
 
 <p align="center">
 <img src="images/feature_attach.png" alt="feature_attach" width="70%">
