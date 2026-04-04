@@ -198,10 +198,10 @@ For **`update`**, **`delete`**, and **`clear`**, a dialog will ask you to confir
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Snowy`.
-* Items in curly brackets are optional.<br>
-  e.g `n/NAME t/TAG {h/HEALTH_STATUS}` can be used as `n/Snowy t/white h/vaccinated` or as `n/Snowy t/white`.
+* Items in square brackets are optional.<br>
+  e.g. `n/NAME t/TRAIT [h/HEALTH_STATUS]` can be used as `n/Snowy t/white h/vaccinated` or as `n/Snowy t/white`.
 * Items with `…` after them can be used multiple times (>= 1).<br>
-  e.g. `[t/TAG]…` can be used as `t/white`, `t/white t/small` etc.
+  e.g. `[t/TRAIT]…` can be used as `t/white`, `t/white t/small` etc.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -556,19 +556,19 @@ _Details coming soon ..._
 ## Command summary
 
 
-| Command                           | Format                                                                             | Examples                                                             |
-| --------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| **Add** a cat                     | `add n/NAME t/TRAIT... l/LOCATION [h/HEALTH_STATUS]`                               | `add n/Bowie t/Orange l/Utown h/Vaccinated`                          |
-| **Attach** a photo to a cat       | `attach INDEX IMAGE_PATH` or `attach CAT_NAME IMAGE_PATH`                          | `attach 1 images/bowie.png` or `attach Bowie images/bowie.png`       |
-| **Delete** a cat by name or index | `delete [CAT_NAME]` or `delete [CAT_NUMBER]`                                       | `delete Snowy` or `delete 3`                                         |
-| **Update** a cat by name or index | `update NAME/INDEX [n/NAME] [t/TRAIT] [l/LOCATION] [h/HEALTH]`                     | `update Snowy l/utown` or `update 3 l/PGPR`                          |
-| **Find** cats                     | `find n/CAT_NAME` or `find l/LOCATION` or `find t/TRAIT` or `find h/HEALTH_STATUS` | `find n/Mochi` or `find t/Striped` or `find l/COM3` or `find h/Sick` |
-| **Export** the cat list to HTML   | `export`                                                                           | `export`                                                             |
-| **Clear** all cats                | `clear`                                                                            | `clear`                                                              |
-| **List** all cats                 | `list`                                                                             | `list`                                                               |
-| **Help**                          | `help`                                                                             | `help`                                                               |
-| **Exit**                          | `exit`                                                                             | `exit`                                                               |
-| **Undo**                          | `undo`                                                                             | `undo`                                                               |
+| Command                           | Format                                                                         | Examples                                                             |
+| --------------------------------- |--------------------------------------------------------------------------------| -------------------------------------------------------------------- |
+| **Add** a cat                     | `add n/NAME t/TRAIT... l/LOCATION [h/HEALTH_STATUS]`                           | `add n/Bowie t/Orange l/Utown h/Vaccinated`                          |
+| **Attach** a photo to a cat       | `attach INDEX IMAGE_PATH` or `attach CAT_NAME IMAGE_PATH`                      | `attach 1 images/bowie.png` or `attach Bowie images/bowie.png`       |
+| **Delete** a cat by name or index | `delete CAT_NAME` or `delete CAT_NUMBER`                                       | `delete Snowy` or `delete 3`                                         |
+| **Update** a cat by name or index | `update NAME/INDEX [n/NAME] [t/TRAIT] [l/LOCATION] [h/HEALTH]`                 | `update Snowy l/utown` or `update 3 l/PGPR`                          |
+| **Find** cats                     | `find n/NAME` or `find l/LOCATION` or `find t/TRAIT` or `find h/HEALTH_STATUS` | `find n/Mochi` or `find t/Striped` or `find l/COM3` or `find h/Sick` |
+| **Export** the cat list to HTML   | `export`                                                                       | `export`                                                             |
+| **Clear** all cats                | `clear`                                                                        | `clear`                                                              |
+| **List** all cats                 | `list`                                                                         | `list`                                                               |
+| **Help**                          | `help`                                                                         | `help`                                                               |
+| **Exit**                          | `exit`                                                                         | `exit`                                                               |
+| **Undo**                          | `undo`                                                                         | `undo`                                                               |
 
 ---
 
