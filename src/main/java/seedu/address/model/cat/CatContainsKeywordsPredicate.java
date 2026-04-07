@@ -3,7 +3,6 @@ package seedu.address.model.cat;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests if a cat matches search keywords by name, location, trait, and health.
