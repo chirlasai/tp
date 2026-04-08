@@ -76,11 +76,13 @@ public class CatListPanel extends UiPart<Region> {
     /** Moves the selection one item down. */
     public void selectNext() {
         catListView.getSelectionModel().selectNext();
+        catListView.scrollTo(catListView.getSelectionModel().getSelectedIndex());
     }
 
     /** Moves the selection one item up. */
     public void selectPrevious() {
         catListView.getSelectionModel().selectPrevious();
+        catListView.scrollTo(catListView.getSelectionModel().getSelectedIndex());
     }
 
     /**
