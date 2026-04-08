@@ -39,7 +39,7 @@ public class AttachCommandTest {
      * and update the cat's image path in the model.
      */
     @Test
-    public void execute_validIndex_fileExists_success() throws IOException {
+    public void execute_validIndex_success() throws IOException {
         Path imageFile = Files.createFile(tempDir.resolve("bowie.png"));
 
         Cat catToEdit = model.getFilteredCatList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -63,7 +63,7 @@ public class AttachCommandTest {
      * and update the cat's image path in the model.
      */
     @Test
-    public void execute_validName_fileExists_success() throws IOException {
+    public void execute_validName_success() throws IOException {
         Path imageFile = Files.createFile(tempDir.resolve("bowie.png"));
 
         Cat catToEdit = model.getFilteredCatList().get(INDEX_FIRST_PERSON.getZeroBased()); // Bowie
@@ -127,7 +127,7 @@ public class AttachCommandTest {
      * with the file-not-found message.
      */
     @Test
-    public void execute_fileNotFound_byIndex_throwsCommandException() {
+    public void execute_fileNotFoundByIndex_throwsCommandException() {
         CatImage missing = new CatImage("nonexistent/path/cat.png");
         AttachCommand command = new AttachCommand(INDEX_FIRST_PERSON, missing);
 
@@ -142,7 +142,7 @@ public class AttachCommandTest {
      * with the file-not-found message.
      */
     @Test
-    public void execute_fileNotFound_byName_throwsCommandException() {
+    public void execute_fileNotFoundByName_throwsCommandException() {
         CatImage missing = new CatImage("nonexistent/path/cat.png");
         AttachCommand command = new AttachCommand(new Name("Bowie"), missing);
 
