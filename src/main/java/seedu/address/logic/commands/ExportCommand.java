@@ -31,21 +31,24 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_FAILURE = "Failed to write %1$s: %2$s";
 
     private final String filename;
+    private final String title;
     private final Path outputPath;
 
     /**
      * Creates an ExportCommand with the default filename "export".
      */
     public ExportCommand() {
-        this("export");
+        this("export", "Cat List");
     }
 
     /**
      * Creates an ExportCommand that writes to {@code filename}.html.
      */
-    public ExportCommand(String filename) {
+    public ExportCommand(String filename, String title) {
         this.filename = filename;
+        this.title = title;
         this.outputPath = Paths.get(filename + ".html");
+
     }
 
     public Path getOutputPath() {
@@ -81,7 +84,7 @@ public class ExportCommand extends Command {
           .append("<html lang=\"en\">\n")
           .append("<head>\n")
           .append("  <meta charset=\"UTF-8\">\n")
-          .append("  <title>").append(escapeHtml(filename)).append("</title>\n")
+          .append("  <title>").append(escapeHtml(title)).append("</title>\n")
           .append("  <style>\n")
           .append("    body { font-family: sans-serif; padding: 20px; }\n")
           .append("    h1 { color: #333; }\n")
@@ -99,7 +102,7 @@ public class ExportCommand extends Command {
           .append("  </style>\n")
           .append("</head>\n")
           .append("<body>\n")
-          .append("  <h1>").append(escapeHtml(filename)).append("</h1>\n")
+          .append("  <h1>").append(escapeHtml(title)).append("</h1>\n")
           .append("  <p>").append(cats.size()).append(" cat(s) listed.</p>\n");
 
         for (int i = 0; i < cats.size(); i++) {

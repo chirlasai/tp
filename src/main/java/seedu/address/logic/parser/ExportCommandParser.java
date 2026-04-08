@@ -27,6 +27,6 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             throw new ParseException(MESSAGE_INVALID_FILENAME);
         }
 
-        return new ExportCommand(filename);
+        return new ExportCommand(filename, trimmed);
     }
 }
