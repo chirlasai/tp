@@ -49,7 +49,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_EDIT_CAT_SUCCESS = "Updated Cat: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to update must be provided.";
     public static final String MESSAGE_DUPLICATE_CAT = "This cat already exists in the cat notebook.";
-    public static final String MESSAGE_INVALID_CAT_NAME = "The cat name provided is invalid";
+    public static final String MESSAGE_INVALID_CAT_NAME = "No cat with that name was found.";
 
     private final Index index;
     private final Name targetName;
