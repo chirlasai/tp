@@ -38,7 +38,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
-     * Validates: not blank, no symbols, max 30 characters.
+     * Validates: not blank, no symbols, not numbers only, max 30 characters.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -50,6 +50,9 @@ public class ParserUtil {
         }
         if (trimmedName.length() > Name.MAX_LENGTH) {
             throw new ParseException(Name.MESSAGE_TOO_LONG);
+        }
+        if (Name.isNumbersOnly(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_NUMBERS_ONLY);
         }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_HAS_SYMBOLS);

@@ -230,6 +230,7 @@ To attach a photo after adding, use the `attach` command.
 </div>
 
 * `n/NAME`, `t/TRAIT`, and `l/LOCATION` are required.
+* `NAME` must contain at least one letter. It can be a mix of letters and numbers (e.g. `R2D2`), but it **cannot be only numbers** (e.g. `123`), because number-only names are ambiguous with index-based commands like `update` and `delete`.
 * `h/HEALTH_STATUS` is optional. Common values include `Vaccinated`, `Neutered`, `Vaccinated and Neutered`, `Injured`, or `Healthy`.
 * You can specify up to 3 `t/TRAIT` prefixes, but duplicate traits (same exact spelling) are not allowed.
 

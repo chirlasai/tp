@@ -471,6 +471,10 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 
   * 1c1. CatPals shows an error message: "The name must not contain symbols!".
     Use case ends.
+* 1c2. The name consists of only numbers (e.g. `123`).
+
+  * 1c2a. CatPals shows an error message: "Name must contain at least one letter and cannot be only numbers!".
+    Use case ends.
 * 1d. A cat with the same name already exists in CatPals.
 
   * 1d1. CatPals shows an error message: "The cat name already exists!".
