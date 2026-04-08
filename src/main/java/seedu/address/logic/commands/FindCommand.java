@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.cat.CatContainsKeywordsPredicate;
 
@@ -31,9 +30,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredCatList(predicate);
+
+        if (model.getFilteredCatList().isEmpty()) {
+            return new CommandResult(MESSAGE_NO_MATCH);
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_CATS_LISTED_OVERVIEW, model.getFilteredCatList().size()));
     }

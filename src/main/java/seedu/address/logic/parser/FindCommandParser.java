@@ -40,7 +40,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        checkForMultipleKeywords(argMultimap);
+        validateKeywords(argMultimap);
 
         // Extracting keywords - requiring individual flags for each keyword
         List<String> nameKeywords = getKeywordsFromPrefix(argMultimap, PREFIX_NAME);
@@ -59,19 +59,27 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Checks if any prefix contains multiple words (separated by spaces).
-     * @throws ParseException if a prefix contains more than one word.
+     * Validates the extracted keywords to ensure they meet the command's constraints.
+     * @throws ParseException if a keyword is empty or if a prefix contains multiple words.
      */
-    private void checkForMultipleKeywords(ArgumentMultimap argMultimap) throws ParseException {
+    private void validateKeywords(ArgumentMultimap argMultimap) throws ParseException {
         Prefix[] prefixes = {PREFIX_NAME, PREFIX_LOCATION, PREFIX_TRAIT, PREFIX_HEALTH};
 
         for (Prefix prefix : prefixes) {
             List<String> values = argMultimap.getAllValues(prefix);
             for (String value : values) {
-                if (value.trim().contains(" ")) {
-                    logger.warning("User provided multiple keywords for a single flag: " + prefix + value);
-                    throw new ParseException("Each keyword must be preceded by its identifier flag "
-                            + "(e.g., t/friendly t/calico).");
+                String trimmedValue = value.trim();
+
+                // 1. Check for empty keywords (Fixes Issue #186)
+                if (trimmedValue.isEmpty()) {
+                    logger.warning("User provided an empty keyword for flag: " + prefix);
+                    throw new ParseException("Search keyword cannot be empty. Please provide a valid search term (e.g., n/Mochi).");
+                }
+
+                // 2. Check for multiple words per flag
+                if (trimmedValue.contains(" ")) {
+                    logger.warning("User provided multiple keywords for single flag " + prefix + ": " + value);
+                    throw new ParseException("Each keyword must be preceded by its identifier flag (e.g., t/friendly t/calico).");
                 }
             }
         }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_CATS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.FindCommand.MESSAGE_NO_MATCH;
 import static seedu.address.testutil.TypicalCats.MOCHI;
 import static seedu.address.testutil.TypicalCats.getTypicalAddressBook;
 
@@ -58,7 +59,7 @@ public class FindCommandTest {
     @Test
     public void execute_noMatchingKeywords() {
         // Expected message for 0 results
-        String expectedMessage = String.format(MESSAGE_CATS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_NO_MATCH, 0);
 
         // Search for a name that definitely doesn't exist in TypicalCats
         CatContainsKeywordsPredicate predicate = new CatContainsKeywordsPredicate(
