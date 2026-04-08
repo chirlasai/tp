@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCats.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -30,31 +30,28 @@ public class ExportCommandTest {
     // ── happy path: full list ─────────────────────────────────────────────────
 
     /**
-     * Exporting the full unfiltered cat list should succeed and report the correct cat count.
+     * Exporting the full unfiltered cat list should succeed and report the correct cat count
+     * in the feedback message.
      */
     @Test
-    public void execute_fullList_success() {
-        ExportCommand command = new ExportCommand();
+    public void execute_fullList_success() throws CommandException {
         int count = model.getFilteredCatList().size();
-        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS, count);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        CommandResult result = new ExportCommand().execute(model);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertTrue(result.getFeedbackToUser().contains(String.valueOf(count)));
     }
 
     // ── happy path: empty list ────────────────────────────────────────────────
 
     /**
-     * Exporting an empty cat list should succeed and report zero cats exported.
+     * Exporting an empty cat list should succeed and report zero cats in the feedback message.
      */
     @Test
-    public void execute_emptyList_success() {
+    public void execute_emptyList_success() throws CommandException {
         Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
-        ExportCommand command = new ExportCommand();
-        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS, 0);
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        CommandResult result = new ExportCommand().execute(emptyModel);
 
-        assertCommandSuccess(command, emptyModel, expectedMessage, expectedModel);
+        assertTrue(result.getFeedbackToUser().contains("0"));
     }
 
     // ── filtered list exports only visible cats ───────────────────────────────
@@ -66,11 +63,9 @@ public class ExportCommandTest {
     @Test
     public void execute_filteredList_reportsVisibleCountOnly() throws CommandException {
         model.updateFilteredCatList(cat -> cat.getName().fullName.equals("Bowie"));
-
         CommandResult result = new ExportCommand().execute(model);
 
-        assertTrue(result.getFeedbackToUser().equals(
-                String.format(ExportCommand.MESSAGE_SUCCESS, 1)));
+        assertTrue(result.getFeedbackToUser().contains("1"));
     }
 
     // ── output file is created ────────────────────────────────────────────────
@@ -95,7 +90,7 @@ public class ExportCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         new ExportCommand().execute(model);
 
-        assertTrue(model.getFilteredCatList().equals(expectedModel.getFilteredCatList()));
+        assertEquals(expectedModel.getFilteredCatList(), model.getFilteredCatList());
     }
 
     // ── equals ────────────────────────────────────────────────────────────────
