@@ -349,6 +349,7 @@ Updates an existing cat in the app.
 
 * Updates the cat at the specified `INDEX` or `CURRENT_NAME`. The index refers to the index number shown in the displayed cat list. The index **must be a positive integer** 1, 2, 3, …
 * At least one field must be provided.
+* Updating a trait will replace all currently existing traits, so if you just want to add a new one, make sure your command include the old traits.
 * Existing values will be updated to the input values; fields not specified are kept unchanged.
 * To change a cat's photo, use the `attach` command instead.
 
