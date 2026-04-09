@@ -25,14 +25,14 @@ public class AttachCommandParser implements Parser<AttachCommand> {
      */
     public AttachCommand parse(String args) throws ParseException {
         String trimmed = args.trim();
-        int spaceIndex = trimmed.indexOf(' ');
+        int lastSpaceIndex = trimmed.lastIndexOf(' ');
 
-        if (spaceIndex == -1) {
+        if (lastSpaceIndex == -1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttachCommand.MESSAGE_USAGE));
         }
 
-        String identifier = trimmed.substring(0, spaceIndex).trim();
-        String second = trimmed.substring(spaceIndex + 1).trim();
+        String identifier = trimmed.substring(0, lastSpaceIndex).trim();
+        String second = trimmed.substring(lastSpaceIndex + 1).trim();
 
         if (identifier.isEmpty() || second.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttachCommand.MESSAGE_USAGE));

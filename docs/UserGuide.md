@@ -298,6 +298,7 @@ Format: `attach INDEX IMAGE_PATH` or `attach CAT_NAME IMAGE_PATH`
 ```
 attach 1 images/my_cat_photo.png
 attach Bowie images/bowie.png
+attach Snowy White images/snowy.png
 ```
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -305,6 +306,20 @@ CatPals must be launched from the command window inside your `CatPals` folder (i
 </div>
 
 If the image file cannot be found at the given path, the cat's card will simply show no photo, while the rest of the data is unaffected.
+
+**Resetting to auto-detection**
+
+If you previously used `attach` to set a custom image path and want to go back to auto-detection, use `--reset`:
+
+Format: `attach INDEX --reset` or `attach CAT_NAME --reset`
+
+```
+attach 1 --reset
+attach Bowie --reset
+attach Snowy White --reset
+```
+
+After a reset, CatPals will look for the image automatically in `images/` by cat name (see Option 1 above), as if `attach` had never been used for that cat.
 
 <p align="center">
 <img src="images/feature_attach.png" alt="feature_attach" width="70%">
@@ -558,9 +573,10 @@ _Details coming soon ..._
 
 
 | Command                           | Format                                                                         | Examples                                                             |
-| --------------------------------- |--------------------------------------------------------------------------------| -------------------------------------------------------------------- |
+|-----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------|
 | **Add** a cat                     | `add n/NAME t/TRAIT... l/LOCATION [h/HEALTH_STATUS]`                           | `add n/Bowie t/Orange l/Utown h/Vaccinated`                          |
 | **Attach** a photo to a cat       | `attach INDEX IMAGE_PATH` or `attach CAT_NAME IMAGE_PATH`                      | `attach 1 images/bowie.png` or `attach Bowie images/bowie.png`       |
+| **Reset Attach** to a cat         | `attach INDEX --reset` or `attach CAT_NAME --reset`                            | `attach 1 --reset` or `attach Bowie --reset`                         |
 | **Delete** a cat by name or index | `delete CAT_NAME` or `delete CAT_NUMBER`                                       | `delete Snowy` or `delete 3`                                         |
 | **Update** a cat by name or index | `update NAME/INDEX [n/NAME] [t/TRAIT] [l/LOCATION] [h/HEALTH]`                 | `update Snowy l/utown` or `update 3 l/PGPR`                          |
 | **Find** cats                     | `find n/NAME` or `find l/LOCATION` or `find t/TRAIT` or `find h/HEALTH_STATUS` | `find n/Mochi` or `find t/Striped` or `find l/COM3` or `find h/Sick` |
