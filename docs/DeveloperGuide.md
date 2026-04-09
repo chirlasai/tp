@@ -241,7 +241,7 @@ The `attach` command allows users to attach an image to an existing cat profile,
 
 `AttachCommandParser` splits on the **last space** to separate the identifier from the image path or `--reset` flag. This allows cat names with spaces (e.g. `Snowy White`) to be used as identifiers.
 
-![AttachSequenceDiagram](images/AttachSequenceDiagram.png)
+<img src="images/AttachSequenceDiagram.png" width="600" />
 
 The `attach` command works as follows:
 
