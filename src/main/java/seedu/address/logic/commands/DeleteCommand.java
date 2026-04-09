@@ -42,7 +42,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a DeleteCommand to delete the cat with the specified {@code targetName} (case-sensitive).
-     * AI-generated.
      */
     public DeleteCommand(Name targetName) {
         this.targetIndex = null;

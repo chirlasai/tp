@@ -63,7 +63,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the [AddressBook Level-3](https://se-education.org/addressbook-level3/) application.
-* Class names were renamed from AB3 defaults to CatPals-related names with the help of [Cursor](https://www.cursor.com/) to improve development efficiency(to help us focus on functional code development)
+* Class names were renamed from AB3 defaults to CatPals-related names to better match the project domain.
+* AI-assisted development tools used: [Claude Code](https://www.anthropic.com/claude-code) and [Cursor](https://www.cursor.com/).
 
 ---
 
