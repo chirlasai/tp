@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor ":User" as User USER_COLOR
+
+box UI UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":ResultDisplay" as ResultDisplay UI_COLOR
+participant ":CatListPanel" as CatListPanel UI_COLOR
+participant ":CatDetailPanel" as CatDetailPanel UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":Logic" as Logic LOGIC_COLOR
+end box
+
+User -> CommandBox : types command,\npresses Enter
+activate CommandBox
+
+CommandBox -> MainWindow : executeCommand(commandText)
+activate MainWindow
+
+MainWindow -> Logic : parseCommand(commandText)
+activate Logic
+Logic --> MainWindow : command
+deactivate Logic
+
+MainWindow -> Logic : executeCommand(command)
+activate Logic
+Logic --> MainWindow : result
+deactivate Logic
+
+MainWindow -> ResultDisplay : setFeedbackToUser(\nresult.getFeedbackToUser())
+activate ResultDisplay
+ResultDisplay --> MainWindow
+deactivate ResultDisplay
+
+MainWindow --> CommandBox
+deactivate MainWindow
+deactivate CommandBox
+
+note over CatListPanel
+  Auto-updates via
+  ObservableList binding
+  when Model data changes
+end note
+
+CatListPanel -> CatDetailPanel : displayCat(selectedCat)
+activate CatDetailPanel
+note right : triggered when user\nnavigates list with ↑ / ↓
+CatDetailPanel --> CatListPanel
+deactivate CatDetailPanel
+
+@enduml
