@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CAT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -64,7 +65,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             } catch (ParseException pe) {
                 if (preamble.matches("-?\\d+")) {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
+                            String.format(MESSAGE_INVALID_CAT_DISPLAYED_INDEX, UpdateCommand.MESSAGE_USAGE), pe);
                 }
                 try {
                     targetName = ParserUtil.parseName(preamble);
