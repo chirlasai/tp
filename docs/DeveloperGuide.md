@@ -794,19 +794,30 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 
 **MSS**
 
-1. User requests to attach an image to a specific cat profile
-2. CatPals prompts the user to provide the file path of the image
-3. User provides the file path
-4. CatPals validates the file path and attaches the image to the cat profile
-5. CatPals shows a success message confirming the attachment
+1. User provides the target cat (by index or name) and the image file path
+2. CatPals validates the file path and format, then attaches the image to the cat profile
+3. CatPals shows a success message confirming the attachment
+
    Use case ends.
 
 **Extensions**
 
-* 4a. The provided file path is invalid or the file is not an image.
-  * 4a1. CatPals shows an error message: "Invalid file path or unsupported file type. Please provide a valid image file.".
-  * 4a2. CatPals prompts the user to provide the file path again.
-    Use case resumes at step 3.
+* 1a. The target index is out of bounds.
+  * 1a1. CatPals shows an error message: "The cat index provided is invalid".
+    Use case ends.
+* 1b. The target cat name does not match any cat in CatPals.
+  * 1b1. CatPals shows an error message: "No cat with the name `<name>` found.".
+    Use case ends.
+* 1c. The user provides `--reset` instead of an image path.
+  * 1c1. CatPals clears the explicit image path for the cat, reverting to auto-detection.
+  * 1c2. CatPals shows a success message confirming the reset.
+    Use case ends.
+* 2a. The provided file path does not exist.
+  * 2a1. CatPals shows an error message: "Image file not found: `<path>`".
+    Use case ends.
+* 2b. The file is not a supported image format (not `.jpg`, `.jpeg`, or `.png`).
+  * 2b1. CatPals shows an error message indicating the incorrect format and the supported types.
+    Use case ends.
 
 **Use case 8 (U8): Export cat data**
 
