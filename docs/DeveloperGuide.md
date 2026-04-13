@@ -652,14 +652,15 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
   Use case ends.
 * 3a. The user requests to delete by name.
 
-  * 3a1. The name is blank.
-    * 3a1a. CatPals shows an error message: "The info to be deleted must not be blank!".
+  * 3a1. The name is blank or contains invalid symbols.
+    * 3a1a. CatPals shows an error message: "Invalid command format!
+      delete: Deletes the cat identified by the index number or name in the displayed cat list.
+      Parameters: INDEX (must be a positive integer) or CAT_NAME
+      Example: delete 1
+      Example: delete Whiskers".
       Use case ends.
-  * 3a2. The name contains symbols.
-    * 3a2a. CatPals shows an error message: "The name must not contain symbols!".
-      Use case ends.
-  * 3a3. The name does not match any cat in CatPals.
-    * 3a3a. CatPals shows an error message: "The input name does not match any cat in CatPal. Is there a typo?".
+  * 3a2. The name does not match any cat in CatPals.
+    * 3a2a. CatPals shows an error message: "No cat with the name 'Mocha' found in the displayed list.".
       Use case ends.
 * 3b. The user requests to delete by number (index).
 
@@ -685,19 +686,9 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 * 2a. The list is empty.
 
   Use case ends.
-* 3a. The name is missing for the find command.
+* 3a. There is no profile with a matching name.
 
-  * 3a1. CatPals shows an error message: "Name is missing for this find command.".
-
-    Use case ends.
-* 3b. The name contains symbols.
-
-  * 3b1. CatPals shows an error message: "The name must not contain symbols".
-
-    Use case ends.
-* 3c. There is no profile with a matching name.
-
-  * 3c1. CatPals shows an error message: "There is no such profile in my records! Is there a typo?".
+  * 3a1. CatPals shows an error message: "There is no such profile in my records! Is there a typo?".
 
     Use case ends.
 
@@ -911,8 +902,7 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The test cases below are not exhaustive. They cover the main features and some edge cases, but there may be other scenarios that are not listed here. Testers should also try out their own scenarios and explore the app to find any issues.
 
 </div>
 
@@ -927,210 +917,233 @@ testers are expected to do more *exploratory* testing.
 ### Launch, shutdown, and UI state
 
 1. Initial launch
-
    1. Run `java -jar catpals.jar`.
    2. Expected: splash screen appears, then main window opens after pressing `Space`.
    3. Expected: sample cat entries are shown on first run.
-2. Window preference persistence
 
+
+2. Window preference persistence
    1. Resize and reposition the app window.
    2. Close and relaunch.
    3. Expected: window size and position are restored.
-3. Keyboard navigation
 
+
+3. Keyboard navigation
    1. Use `Up` / `Down` arrows in command box.
    2. Expected: selected cat changes and detail panel updates.
-4. Graceful exit
 
+
+4. Graceful exit
    1. Run `exit`.
    2. Expected: app closes without errors.
 
 ### Command parsing and basic validation
 
 1. Unknown command
-
    1. Test case: `foobar`
    2. Expected: error indicating unknown command.
-2. Case-insensitive command words where supported
 
+
+2. Case-insensitive command words where supported
    1. Test cases: `FIND n/Bowie`, `HeLp`, `LiSt`.
    2. Expected: command behavior matches lowercase equivalent.
-3. Extra parameters policy checks
 
-   1. Test case: `list extra`
-   2. Expected: explicit error that `list` does not take extra parameters.
-   3. Test cases: `help extra`, `clear extra`, `exit extra`
-   4. Expected: command still executes (extra text ignored).
+
+3. Extra parameters policy checks
+   1. Test cases: `help extra`, `clear extra`, `exit extra`, `list extra`
+   2. Expected: command still executes (extra text ignored).
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For each section below, the test cases are meant to be tested on the sample data the app opens with on initial launch.
+Within each section, test cases are dependent on the test cases in the previous step. Testers are expected to adjust appropriately if they deviated from the given test cases. 
+
+</div>
 
 ### Feature-level test cases
 
 #### Add
 
 1. Valid add
-
    1. Test case: `add n/Brownie t/Friendly t/Orange l/Utown h/Healthy`
    2. Expected: new cat appears in list with all fields.
-2. Required fields missing
 
+   
+2. Required fields missing
    1. Test case: `add n/Brownie l/Utown`
    2. Expected: parse/usage error.
-3. Trait constraints
 
+   
+3. Trait constraints
    1. Test case: more than 3 traits.
    2. Expected: validation error.
    3. Test case: duplicate trait values.
    4. Expected: validation error.
-4. Duplicate identity
 
+   
+4. Duplicate identity
    1. Add a cat, then add another with same name.
    2. Expected: duplicate-cat rejection.
 
 #### Attach
 
 1. Attach by index
-
    1. Test case: `attach 1 images/bowie.png`
    2. Expected: selected cat displays image (if path exists).
-2. Attach by name
+   
 
+2. Attach by name
    1. Test case: `attach Bowie images/bowie.png`
    2. Expected: matching cat gets image.
-3. Invalid path
 
+
+3. Invalid path
    1. Test case: `attach 1 images/does-not-exist.png`
    2. Expected: command fails with invalid path/file message.
-4. Invalid target
+   
 
+4. Invalid target
    1. Test case: `attach 999 images/bowie.png`
    2. Expected: invalid index error.
 
 #### Update
 
 1. Update by index
-
    1. Test case: `update 1 n/Snowy t/White l/COM3 h/Vaccinated`
    2. Expected: cat fields update after confirmation.
-2. Update by current name
+   
 
+2. Update by current name
    1. Test case: `update Snowy h/Healthy`
    2. Expected: correct cat updated.
-3. No fields provided
 
+   
+3. No fields provided
    1. Test case: `update 1`
    2. Expected: error indicating at least one field required.
-4. Trait replacement semantics
 
+   
+4. Trait replacement semantics
    1. Test case: `update 1 t/Shy`
    2. Expected: existing traits are replaced by only `Shy`.
-5. Cancel path
 
+   
+5. Cancel path
    1. Run valid `update`, then cancel at confirmation dialog.
    2. Expected: no data change.
 
 #### Find and list interaction
 
 1. Single-field find
-
    1. Test case: `find n/Bow`
    2. Expected: only matching names remain in filtered list.
-2. Multi-field find
-
+  
+ 
+2.Multi-field find
    1. Test case: `find l/Utown t/Friendly`
    2. Expected: results satisfy all specified field groups.
-3. No match behavior
 
+   
+3. No match behavior
    1. Test case: `find n/NoSuchCat`
    2. Expected: empty list and no-match message.
-4. Reset after filtering
 
+   
+4. Reset after filtering
    1. Test case: run any `find`, then `list`.
    2. Expected: full cat list is shown again.
 
 #### Delete
 
 1. Delete by filtered index
-
    1. Run `find` to reduce list.
    2. Test case: `delete 1`
    3. Expected: first cat in filtered view is removed after confirmation.
-2. Delete by name
 
+   
+2. Delete by name
    1. Test case: `delete Brownie`
    2. Expected: cat with that name is removed after confirmation.
-3. Invalid index/name
 
+   
+3. Invalid index/name
    1. Test cases: `delete 0`, `delete 999`, `delete NoSuchCat`
    2. Expected: command fails without data change.
-4. Cancel path
 
+
+5. Cancel path
    1. Run valid delete, then cancel confirmation.
    2. Expected: no deletion occurs.
 
 #### Export
 
 1. Default export
-
    1. Test case: `export`
    2. Expected: `export.html` is created in app folder.
-2. Custom filename
 
+   
+2. Custom filename
    1. Test case: `export utown cats`
    2. Expected: `utown-cats.html` is created.
-3. Filter-aware export
 
+   
+3. Filter-aware export
    1. Run `find l/Utown`, then `export subset`.
    2. Expected: exported file contains only currently displayed cats.
-4. Invalid filename characters
 
+   
+4. Invalid filename characters
    1. Test case: `export bad:name`
    2. Expected: validation error; no file created.
 
 #### Clear
 
 1. Confirm clear
-
    1. Test case: `clear`
    2. Confirm dialog.
    3. Expected: all cats removed.
-2. Cancel clear
 
+   
+2. Cancel clear
    1. Test case: `clear`, then cancel.
    2. Expected: list remains unchanged.
 
 #### Help
 
 1. Open help UI
-
    1. Test case: `help`
    2. Expected: help window/panel is shown.
 
 #### Undo
 
 1. Undo supported commands
-
    1. Perform `add`, then `undo`.
    2. Expected: confirmation dialog appears showing the full `add` command. After confirming, added cat is reverted.
    3. Repeat for `delete`, `update`, and `attach`.
-2. Undo after read-only commands (state preserved)
 
+   
+2. Undo after read-only commands (state preserved)
    1. Run `add`, then `find`, then `undo`.
    2. Expected: undo still works — the `add` is reverted because read-only commands preserve the undo state.
    3. Run `add`, then `list`, then `undo`.
    4. Expected: undo still works — the `add` is reverted.
-3. Undo after `clear` (state cleared)
 
+   
+3. Undo after `clear` (state cleared)
    1. Run `add`, then `clear`, then `undo`.
    2. Expected: `Nothing to undo.` (`clear` clears the undo state).
-4. Undo with no prior undoable command
 
+   
+4. Undo with no prior undoable command
    1. Launch app fresh, then `undo`.
    2. Expected: `Nothing to undo.`
-5. Repeated undo
 
+   
+5. Repeated undo
    1. Run one undoable command, then `undo` twice.
    2. Expected: first succeeds (with confirmation dialog), second reports nothing to undo.
-6. Undo confirmation cancel
 
+   
+6. Undo confirmation cancel
    1. Run `add`, then `undo`, then press Escape on the confirmation dialog.
    2. Expected: undo is cancelled, the added cat remains.
 
@@ -1141,14 +1154,16 @@ testers are expected to do more *exploratory* testing.
    1. Add/update/delete at least one cat.
    2. Close app and relaunch.
    3. Expected: latest data state is preserved.
-2. Missing data file
 
+   
+2. Missing data file
    1. Close app.
    2. Rename `data/addressbook.json` to `addressbook.backup.json`.
    3. Relaunch.
    4. Expected: app starts with empty/sample fallback state (no crash), and recreates data file when data changes are made.
-3. Corrupted data file
 
+   
+3. Corrupted data file
    1. Close app.
    2. Edit `data/addressbook.json` and intentionally break JSON syntax.
    3. Relaunch.
