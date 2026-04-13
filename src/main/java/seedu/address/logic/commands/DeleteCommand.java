@@ -62,7 +62,7 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_CAT_SUCCESS, Messages.format(catToDelete)));
         } else {
             Optional<Cat> catToDelete = lastShownList.stream()
-                    .filter(cat -> cat.getName().fullName.equals(targetName.fullName))
+                    .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst();
             if (catToDelete.isEmpty()) {
                 throw new CommandException(String.format(MESSAGE_CAT_NOT_FOUND, targetName.fullName));
@@ -91,7 +91,7 @@ public class DeleteCommand extends Command {
             return lastShownList.get(targetIndex.getZeroBased());
         } else {
             return lastShownList.stream()
-                    .filter(cat -> cat.getName().fullName.equals(targetName.fullName))
+                    .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
                     .orElseThrow(() -> new CommandException(String.format(MESSAGE_CAT_NOT_FOUND, targetName.fullName)));
         }
