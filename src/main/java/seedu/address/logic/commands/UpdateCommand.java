@@ -103,7 +103,8 @@ public class UpdateCommand extends Command {
             catToEdit = lastShownList.stream()
                     .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
-                    .orElseThrow(() -> new CommandException(String.format(MESSAGE_INVALID_CAT_NAME, targetName.fullName)));
+                    .orElseThrow(() -> new CommandException(
+                            String.format(MESSAGE_INVALID_CAT_NAME, targetName.fullName)));
         }
         Cat editedCat = createEditedCat(catToEdit, editCatDescriptor);
 
@@ -149,14 +150,16 @@ public class UpdateCommand extends Command {
             catToEdit = lastShownList.stream()
                     .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
-                    .orElseThrow(() -> new CommandException(String.format(MESSAGE_INVALID_CAT_NAME, targetName.fullName)));
+                    .orElseThrow(() -> new CommandException(
+                            String.format(MESSAGE_INVALID_CAT_NAME, targetName.fullName)));
         }
         Cat editedCat = createEditedCat(catToEdit, editCatDescriptor);
 
         if (!catToEdit.isSameCat(editedCat) && model.hasCat(editedCat)) {
             throw new CommandException(MESSAGE_DUPLICATE_CAT);
         }
-        assert catToEdit.isSameCat(editedCat) || !model.hasCat(editedCat) : "Preview would introduce a duplicate cat";
+        assert catToEdit.isSameCat(editedCat) || !model.hasCat(editedCat)
+                : "Preview would introduce a duplicate cat";
 
         return editedCat;
     }
