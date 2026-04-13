@@ -436,7 +436,7 @@ not t/friendly white.
 
 ### Deleting a cat : `delete`
 
-Deletes the specified cat from the list.
+Deletes the specified cat from the current list that is in display (Either a full list or a list filtered by "find" command).
 
 Format: `delete INDEX` or `delete NAME`
 
