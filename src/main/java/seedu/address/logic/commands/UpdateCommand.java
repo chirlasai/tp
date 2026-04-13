@@ -273,7 +273,7 @@ public class UpdateCommand extends Command {
         }
 
         /**
-               * Returns the {@code Location} to update, or empty if not set.
+                * Returns the {@code Location} to update, or empty if not set.
          */
         public Optional<Location> getLocation() {
             return Optional.ofNullable(location);
