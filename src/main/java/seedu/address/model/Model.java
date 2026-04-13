@@ -86,6 +86,12 @@ public interface Model {
     void updateFilteredCatList(Predicate<Cat> predicate);
 
     /**
+     * Returns the predicate currently applied to the filtered cat list, or {@code null}
+     * if no predicate is set (i.e. all cats are shown).
+     */
+    Predicate<? super Cat> getCatListPredicate();
+
+    /**
      * Saves a snapshot of the current address book state so it can be restored by {@link #undoLastChange()}.
      * Should be called before executing any command that modifies data (add, delete, update, attach).
      */

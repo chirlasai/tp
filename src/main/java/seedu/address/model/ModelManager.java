@@ -134,6 +134,11 @@ public class ModelManager implements Model {
         filteredCats.setPredicate(predicate);
     }
 
+    @Override
+    public Predicate<? super Cat> getCatListPredicate() {
+        return filteredCats.getPredicate();
+    }
+
     //=========== Undo Support ================================================================================
 
     @Override

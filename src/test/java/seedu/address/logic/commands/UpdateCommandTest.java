@@ -93,7 +93,11 @@ public class UpdateCommandTest {
         String expectedMessage = String.format(UpdateCommand.MESSAGE_EDIT_CAT_SUCCESS, Messages.format(editedCat));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCat(model.getFilteredCatList().get(0), editedCat);
+        expectedModel.setCat(expectedModel.getAddressBook().getCatList().get(INDEX_FIRST_PERSON.getZeroBased()),
+                editedCat);
+        // The renamed cat no longer matches the original find predicate, so UpdateCommand
+        // wraps the predicate to keep the just-edited cat visible.
+        expectedModel.updateFilteredCatList(cat -> cat.isSameCat(editedCat));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

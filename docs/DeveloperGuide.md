@@ -743,7 +743,7 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
     * 3a2a. CatPals shows an error message: "The name must not contain symbols!".
       Use case ends.
   * 3a3. The name does not match any cat in CatPals.
-    * 3a3a. CatPals shows an error message: "No such profile is found in my records. Please ensure the cat’s name is spelled correctly.".
+    * 3a3a. CatPals shows an error message: "No cat with that name was found.".
       Use case ends.
 * 3b. The user requests to update by index.
 
@@ -751,7 +751,7 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
     * 3b1a. CatPals shows an error message: "The info to be updated must not be blank!".
       Use case ends.
   * 3b2. The index is out of range (invalid index).
-    * 3b2a. CatPals shows an error message: "No such profile is found in my records. Please ensure the cat number is in the range!".
+    * 3b2a. CatPals shows an error message: "The cat index provided is invalid!".
       Use case resumes at step 2.
 * 3c. The updated status data is invalid.
 

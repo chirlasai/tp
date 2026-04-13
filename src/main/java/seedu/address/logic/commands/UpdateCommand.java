@@ -5,13 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRAIT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CATS;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -100,7 +100,7 @@ public class UpdateCommand extends Command {
             }
             catToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            catToEdit = model.getAddressBook().getCatList().stream()
+            catToEdit = lastShownList.stream()
                     .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
                     .orElseThrow(() -> new CommandException(MESSAGE_INVALID_CAT_NAME));
@@ -113,9 +113,17 @@ public class UpdateCommand extends Command {
         assert catToEdit.isSameCat(editedCat) || !model.hasCat(editedCat)
                 : "Model must allow replacing target with edited cat";
 
+        Predicate<? super Cat> previousPredicate = model.getCatListPredicate();
         model.setCat(catToEdit, editedCat);
-        model.updateFilteredCatList(PREDICATE_SHOW_ALL_CATS);
         assert model.hasCat(editedCat) : "Model must contain the updated cat after setCat";
+
+        // Keep the just-updated cat visible even if its new fields no longer match the active filter,
+        // so the user does not lose sight of the cat they just edited.
+        if (previousPredicate != null && !previousPredicate.test(editedCat)) {
+            Predicate<? super Cat> retained = previousPredicate;
+            model.updateFilteredCatList(cat -> cat.isSameCat(editedCat) || retained.test(cat));
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_CAT_SUCCESS, Messages.format(editedCat)));
     }
 
@@ -138,7 +146,7 @@ public class UpdateCommand extends Command {
             }
             catToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            catToEdit = model.getAddressBook().getCatList().stream()
+            catToEdit = lastShownList.stream()
                     .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
                     .orElseThrow(() -> new CommandException(MESSAGE_INVALID_CAT_NAME));
@@ -265,7 +273,7 @@ public class UpdateCommand extends Command {
         }
 
         /**
-         * Returns the {@code Location} to update, or empty if not set.
+                * Returns the {@code Location} to update, or empty if not set.
          */
         public Optional<Location> getLocation() {
             return Optional.ofNullable(location);

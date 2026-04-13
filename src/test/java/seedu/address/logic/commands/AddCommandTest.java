@@ -169,6 +169,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Predicate<? super Cat> getCatListPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void saveUndoState() {
             // undo state is not relevant for most command unit tests
         }

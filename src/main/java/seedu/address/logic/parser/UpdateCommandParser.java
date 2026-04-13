@@ -53,12 +53,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         Name targetName = null;
 
         if (!hasAnyFieldPrefixes) {
-            try {
-                index = ParserUtil.parseIndex(preamble);
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
-            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         } else {
             try {
                 index = ParserUtil.parseIndex(preamble);
