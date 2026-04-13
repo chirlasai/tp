@@ -76,9 +76,19 @@ public class CatDetailPanel extends UiPart<Region> {
             catDetailImage.setImage(new Image(imageFile.toURI().toString()));
             catDetailImage.setVisible(true);
             noImageLabel.setVisible(false);
+        } else if (cat.getImage().hasImage()) {
+            // Explicit path was set but the file no longer exists
+            catDetailImage.setImage(null);
+            catDetailImage.setVisible(false);
+            noImageLabel.setText("⚠ Image not found: " + cat.getImage().value
+                    + "\nUse 'attach --reset' to clear it.");
+            noImageLabel.setStyle("-fx-text-fill: #FFD700;");
+            noImageLabel.setVisible(true);
         } else {
             catDetailImage.setImage(null);
             catDetailImage.setVisible(false);
+            noImageLabel.setText("No image");
+            noImageLabel.setStyle("");
             noImageLabel.setVisible(true);
         }
 

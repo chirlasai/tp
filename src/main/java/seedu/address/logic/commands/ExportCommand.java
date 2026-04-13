@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -122,8 +123,14 @@ public class ExportCommand extends Command {
         // Image column
         File imageFile = CatImageUtil.resolveImageFile(cat);
         if (imageFile != null) {
-            sb.append("    <img src=\"").append(escapeHtml(imageFile.getPath()))
-              .append("\" alt=\"").append(escapeHtml(cat.getName().fullName)).append("\">\n");
+            try {
+                String mime = imageFile.getName().toLowerCase().endsWith(".png") ? "image/png" : "image/jpeg";
+                String b64 = Base64.getEncoder().encodeToString(Files.readAllBytes(imageFile.toPath()));
+                sb.append("    <img src=\"data:").append(mime).append(";base64,").append(b64)
+                  .append("\" alt=\"").append(escapeHtml(cat.getName().fullName)).append("\">\n");
+            } catch (IOException e) {
+                sb.append("    <div class=\"no-image\">No image</div>\n");
+            }
         } else {
             sb.append("    <div class=\"no-image\">No image</div>\n");
         }
