@@ -881,7 +881,9 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 
 ### Portability
 
-- Should support exporting data in HTML format for backup or migration purposes.
+- The system's data should be exportable to open, human-readable formats
+  (e.g. HTML) to facilitate backup, migration, and interoperability
+  with other systems.
 
 *{More to be added}*
 
