@@ -881,7 +881,7 @@ MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low 
 
 ### Portability
 
-- Should support exporting data in CSV or JSON format for backup or migration purposes.
+- Should support exporting data in HTML format for backup or migration purposes.
 
 *{More to be added}*
 
