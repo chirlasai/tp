@@ -100,7 +100,7 @@ public class UpdateCommand extends Command {
             }
             catToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            catToEdit = model.getAddressBook().getCatList().stream()
+            catToEdit = lastShownList.stream()
                     .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
                     .orElseThrow(() -> new CommandException(MESSAGE_INVALID_CAT_NAME));
@@ -146,7 +146,7 @@ public class UpdateCommand extends Command {
             }
             catToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            catToEdit = model.getAddressBook().getCatList().stream()
+            catToEdit = lastShownList.stream()
                     .filter(cat -> cat.getName().fullName.equalsIgnoreCase(targetName.fullName))
                     .findFirst()
                     .orElseThrow(() -> new CommandException(MESSAGE_INVALID_CAT_NAME));
@@ -273,7 +273,7 @@ public class UpdateCommand extends Command {
         }
 
         /**
-              * Returns the {@code Location} to update, or empty if not set.
+               * Returns the {@code Location} to update, or empty if not set.
          */
         public Optional<Location> getLocation() {
             return Optional.ofNullable(location);
