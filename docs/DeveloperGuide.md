@@ -342,7 +342,7 @@ The export feature allows users to export the currently displayed cat list to an
 **Format:** `export [TITLE]`
 * If `TITLE` is omitted, the file is saved as `export.html` with the heading "Cat List".
 * If `TITLE` is provided (e.g. `export Utown Cats`), spaces are replaced with hyphens for the filename (`utown-cats.html`), and the original text is used as the page heading (`Utown Cats`).
-* `TITLE` must not contain any of the characters `\ / : * ? " < > |`; otherwise a `ParseException` is thrown.
+* `TITLE` must not contain any of the characters `\ / : * ? " < > |`, otherwise a `ParseException` is thrown.
 
 The following sequence diagram shows how an export operation is carried out:
 
