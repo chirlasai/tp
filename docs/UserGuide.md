@@ -472,7 +472,7 @@ Format: `delete INDEX` or `delete NAME`
 Examples:
 
 * `list` followed by `delete 2` deletes the 2nd cat in the current list.
-* `find Betsy` followed by `delete 1` deletes the 1st cat in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st cat in the results of the `find` command.
 * `delete Brownie` deletes the cat with the specific name "Brownie".
 
 Before the cat is removed, CatPals will show a confirmation dialog. Press **Enter** to confirm or **Esc** to cancel.
