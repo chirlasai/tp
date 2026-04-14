@@ -432,7 +432,7 @@ Format: `find n/CAT_NAME`, `find l/LOCATION`, `find t/TRAIT`, or `find h/HEALTH_
 * The order of the keywords does not matter. For example, both `find t/friendly l/COM3` and `find l/COM3 t/friendly` are accepted.
 * Cats matching all keywords will be returned.
   * e.g. `find l/COM3 t/friendly` will return all cats that are at `COM3` **and** have the trait `friendly`.
-* Search terms cannot contain symbols.
+* Names can only contain **letters, numbers, and spaces** — symbols such as apostrophes (`'`), hyphens (`-`), and slashes (`/`) are not allowed. Maximum **30** characters (counted after trimming).
 
 **Examples:**
 

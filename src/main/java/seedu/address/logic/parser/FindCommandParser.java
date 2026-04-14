@@ -86,11 +86,21 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (Prefix prefix : prefixes) {
             List<String> values = argMultimap.getAllValues(prefix);
             for (String value : values) {
-                // Only check for empty keywords (Fixes Issue #186)
-                if (value.trim().isEmpty()) {
+                String trimmedValue = value.trim();
+                // 1. Check for empty keywords
+                if (trimmedValue.isEmpty()) {
                     logger.warning("User provided an empty keyword for flag: " + prefix);
                     throw new ParseException("Search keyword cannot be empty. "
                             + "Please provide a valid search term (e.g., n/Mochi).");
+                }
+
+                // 2. Enforce Name constraints
+                if (prefix.equals(PREFIX_NAME)) {
+                    if (!seedu.address.model.cat.Name.isValidName(trimmedValue)) {
+                        logger.warning("User provided invalid characters in name search: " + trimmedValue);
+                        // Throws the standard "Names should only contain alphanumeric characters..." message
+                        throw new ParseException(seedu.address.model.cat.Name.MESSAGE_CONSTRAINTS);
+                    }
                 }
             }
         }
