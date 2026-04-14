@@ -533,8 +533,7 @@ Provides fast, CLI-optimized access to information of stray cats living in NUS c
 
 ### User stories
 
-Priorities:
-MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: MVP - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
 | Priority   | As a …                            | I want to …                                                                                                 | So that I can…                                                                        |
