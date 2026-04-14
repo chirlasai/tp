@@ -237,7 +237,8 @@ To attach a photo after adding, use the `attach` command.
 
 :exclamation: **Caution: Input trimming and character limits**
 All input fields (name, trait, location, health status) are automatically trimmed before being stored — leading/trailing spaces are removed and consecutive spaces within a value are collapsed into a single space. Character limits are counted **after** this trimming (i.e., based on the cleaned-up value that is actually stored). This applies to all commands that accept these fields (e.g., `add`, `update`).<br>
-For example: <code>t/long&nbsp;&nbsp;&nbsp;&nbsp;tail</code> is stored as `t/long tail` (9 characters, not 13). So `t/long tail` and <code>t/long&nbsp;&nbsp;&nbsp;&nbsp;tail</code> are treated as the **same** trait. Similarly, `l/Utown Residence` and <code>l/Utown&nbsp;&nbsp;&nbsp;&nbsp;Residence</code> refer to the **same** location. However, `l/Utown Residence` and `l/U town Residence` are **different** because the words themselves differ.
+For example: <code>t/long&nbsp;&nbsp;&nbsp;&nbsp;tail</code> is stored as `t/long tail` (9 characters, not 13). So `t/long tail` and <code>t/long&nbsp;&nbsp;&nbsp;&nbsp;tail</code> are treated as the **same** trait. Similarly, `l/Utown Residence` and <code>l/Utown&nbsp;&nbsp;&nbsp;&nbsp;Residence</code> refer to the **same** location. However, `l/Utown Residence` and `l/U town Residence` are **different** because the words themselves differ.<br>
+Like many CLI applications, if multiple fields are invalid at the same time, CatPals only reports the **first** error it encounters. Fields are validated in this order: **Name → Location → Trait → Health Status**. Fix the reported field, re-run the command, and the next invalid field (if any) will then be flagged. For example, if both the name and location exceed their limits, you will only see the name error first. After fixing the name, re-running the command will then show the location error.
 
 </div>
 
@@ -408,7 +409,8 @@ If a name contains a word starting with `n/`, `t/`, `l/`, or `h/`, the command w
 :exclamation: **Caution: Input trimming and character limits**
 All input fields (name, trait, location, health status) are automatically trimmed before being stored — leading/trailing spaces are removed and consecutive spaces within a value are collapsed into a single space. Character limits are counted **after** this trimming (i.e., based on the cleaned-up value that is actually stored). This applies to all commands that accept these fields (e.g., `add`, `update`).<br>
 For example: <code>t/long&nbsp;&nbsp;&nbsp;&nbsp;tail</code> is stored as `t/long tail` (9 characters, not 13). So `t/long tail` and <code>t/long&nbsp;&nbsp;&nbsp;&nbsp;tail</code> are treated as the **same** trait. Similarly, `l/Utown Residence` and <code>l/Utown&nbsp;&nbsp;&nbsp;&nbsp;Residence</code> refer to the **same** location. However, `l/Utown Residence` and `l/U town Residence` are **different** because the words themselves differ.<br>
-Character limits — Name: **30**, Trait: **50**, Location: **50**, Health Status: **50**.
+Character limits — Name: **30**, Trait: **50**, Location: **50**, Health Status: **50**.<br>
+Like many CLI applications, if multiple fields are invalid at the same time, CatPals only reports the **first** error it encounters. Fields are validated in this order: **Name → Location → Health Status → Trait**. Fix the reported field, re-run the command, and the next invalid field (if any) will then be flagged. For example, if both the name and location exceed their limits, you will only see the name error first. After fixing the name, re-running the command will then show the location error.
 
 </div>
 
